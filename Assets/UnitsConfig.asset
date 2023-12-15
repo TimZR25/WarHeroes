@@ -1,0 +1,89 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae7f72a801285df48aa101f47d293afa, type: 3}
+  m_Name: UnitsConfig
+  m_EditorClassIdentifier: 
+  Humans:
+  - Sprite: {fileID: -1389611536, guid: 8b548bfbc6e2aef4a810c4301fd7a92c, type: 3}
+    <Name>k__BackingField: HumanWarrior
+    <Armor>k__BackingField: 7
+    <Description>k__BackingField: HumanWarrior
+    <DistanceOfMove>k__BackingField: 3
+    <Initiative>k__BackingField: 5
+    <Score>k__BackingField: 5
+    <AmountEnergy>k__BackingField: 3
+  - Sprite: {fileID: -1919383102, guid: 8b548bfbc6e2aef4a810c4301fd7a92c, type: 3}
+    <Name>k__BackingField: HumanMage
+    <Armor>k__BackingField: 2
+    <Description>k__BackingField: HumanMage
+    <DistanceOfMove>k__BackingField: 2
+    <Initiative>k__BackingField: 2
+    <Score>k__BackingField: 10
+    <AmountEnergy>k__BackingField: 20
+  - Sprite: {fileID: -2145758911, guid: 8b548bfbc6e2aef4a810c4301fd7a92c, type: 3}
+    <Name>k__BackingField: HumanArcher
+    <Armor>k__BackingField: 1
+    <Description>k__BackingField: HumanArcher
+    <DistanceOfMove>k__BackingField: 6
+    <Initiative>k__BackingField: 3
+    <Score>k__BackingField: 10
+    <AmountEnergy>k__BackingField: 5
+  Orcs:
+  - Sprite: {fileID: -870274220, guid: 8b548bfbc6e2aef4a810c4301fd7a92c, type: 3}
+    <Name>k__BackingField: OrcWarrior
+    <Armor>k__BackingField: 5
+    <Description>k__BackingField: OrcWarrior
+    <DistanceOfMove>k__BackingField: 3
+    <Initiative>k__BackingField: 5
+    <Score>k__BackingField: 5
+    <AmountEnergy>k__BackingField: 5
+  - Sprite: {fileID: 1098558934, guid: 8b548bfbc6e2aef4a810c4301fd7a92c, type: 3}
+    <Name>k__BackingField: OrcArcher
+    <Armor>k__BackingField: 5
+    <Description>k__BackingField: OrcArcher
+    <DistanceOfMove>k__BackingField: 3
+    <Initiative>k__BackingField: 5
+    <Score>k__BackingField: 5
+    <AmountEnergy>k__BackingField: 5
+  - Sprite: {fileID: 9082954, guid: 8b548bfbc6e2aef4a810c4301fd7a92c, type: 3}
+    <Name>k__BackingField: OrcMage
+    <Armor>k__BackingField: 5
+    <Description>k__BackingField: OrcMage
+    <DistanceOfMove>k__BackingField: 3
+    <Initiative>k__BackingField: 5
+    <Score>k__BackingField: 5
+    <AmountEnergy>k__BackingField: 5
+  Undeads:
+  - Sprite: {fileID: -1341608846, guid: 8b548bfbc6e2aef4a810c4301fd7a92c, type: 3}
+    <Name>k__BackingField: UndeadWarrior
+    <Armor>k__BackingField: 5
+    <Description>k__BackingField: UndeadWarrior
+    <DistanceOfMove>k__BackingField: 4
+    <Initiative>k__BackingField: 5
+    <Score>k__BackingField: 5
+    <AmountEnergy>k__BackingField: 5
+  - Sprite: {fileID: 1175382225, guid: 8b548bfbc6e2aef4a810c4301fd7a92c, type: 3}
+    <Name>k__BackingField: UndeadArcher
+    <Armor>k__BackingField: 3
+    <Description>k__BackingField: UndeadArcher
+    <DistanceOfMove>k__BackingField: 5
+    <Initiative>k__BackingField: 6
+    <Score>k__BackingField: 5
+    <AmountEnergy>k__BackingField: 5
+  - Sprite: {fileID: 1354523805, guid: 8b548bfbc6e2aef4a810c4301fd7a92c, type: 3}
+    <Name>k__BackingField: UndeadArcher
+    <Armor>k__BackingField: 2
+    <Description>k__BackingField: UndeadArcher
+    <DistanceOfMove>k__BackingField: 3
+    <Initiative>k__BackingField: 5
+    <Score>k__BackingField: 5
+    <AmountEnergy>k__BackingField: 5

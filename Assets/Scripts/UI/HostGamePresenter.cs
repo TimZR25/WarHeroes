@@ -1,27 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UIElements;
 
 namespace Assets.Scripts.UI
 {
     public class HostGamePresenter
     {
-        private IHostGameUIView _view; 
-
-        private List<IDataPlayer> _dataPlayers = new List<IDataPlayer>();
+        private IHostGameView _view; 
 
         private string _errorText;
-        public EventHandler<string> OnErrorTextChanged;
 
-        public HostGamePresenter(IHostGameUIView hostGameUIView)
+        public event EventHandler<string> OnErrorTextChanged;
+        public Action<List<IDataPlayer>, int> OnDataApproved;
+
+        public HostGamePresenter(IHostGameView hostGameUIView)
         {
             _view = hostGameUIView;
         }
 
         public void OnPlayButtonClicked()
         {
-            _dataPlayers.Clear();
+            List<IDataPlayer> dataPlayers = new List<IDataPlayer>();
 
             if (IsCorrectData() == false) return;
 
@@ -29,13 +30,13 @@ namespace Assets.Scripts.UI
 
             for (int i = 0; i < _view.PlayersNamesField.Count; i++)
             {
-                _dataPlayers.Add(new DataPlayer(_view.PlayersNamesField[i].text,
-                   (TypeFaction)_view.PlayersFactionDropdown[i].value, int.Parse(_view.PlayersScoreField[i].text)));
+                dataPlayers.Add(new DataPlayer(_view.PlayersNamesField[i].text,
+                   (TypeFaction)_view.PlayersFactionDropdown[i].value));
             }
 
+            int fieldSize = int.Parse(_view.SizeField.text);
 
-            ShowPlayerData(0);
-            ShowPlayerData(1);
+            OnDataApproved?.Invoke(dataPlayers, fieldSize);
         }
 
         private bool IsCorrectData()
@@ -52,23 +53,9 @@ namespace Assets.Scripts.UI
                     OnErrorTextChanged?.Invoke(this, _errorText);
                     return false;
                 }
-
-                if (string.IsNullOrEmpty(_view.PlayersScoreField[i].text) || _view.PlayersScoreField[i].text[0] == '0')
-                {
-                    _errorText = $"Количество очков игрока №{playerNumber} - пустое";
-                    OnErrorTextChanged?.Invoke(this, _errorText);
-                    return false;
-                }
-
-                if (_view.PlayersScoreField[i].text[0] == '-')
-                {
-                    _errorText = $"Количество очков игрока №{playerNumber} - отрицательное";
-                    OnErrorTextChanged?.Invoke(this, _errorText);
-                    return false;
-                }
             }
 
-            if (string.IsNullOrEmpty(_view.SizeField.text))
+            if (string.IsNullOrEmpty(_view.SizeField.text) || int.Parse(_view.SizeField.text) == 0)
             {
                 _errorText = $"Размер поля не задан";
                 OnErrorTextChanged?.Invoke(this, _errorText);
@@ -86,13 +73,6 @@ namespace Assets.Scripts.UI
             OnErrorTextChanged?.Invoke(this, _errorText);
 
             return true;
-        }
-
-        private void ShowPlayerData(int i)
-        {
-            Debug.Log(_dataPlayers[i].Name);
-            Debug.Log(_dataPlayers[i].Score);
-            Debug.Log(_dataPlayers[i].Faction);
         }
     }
 }
