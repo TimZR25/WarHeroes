@@ -9,7 +9,7 @@ namespace Assets.Scripts.UI
 {
     public class HostGameMain : MonoBehaviour
     {
-        [SerializeField] private HostGameUIView _gameUIView;
+        [SerializeField] private HostGameView _gameUIView;
 
         public void Awake()
         {
