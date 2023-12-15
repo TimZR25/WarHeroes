@@ -1302,7 +1302,7 @@ GameObject:
   - component: {fileID: 1260300516}
   - component: {fileID: 1260300518}
   m_Layer: 0
-  m_Name: DialogueTrigger
+  m_Name: HostGameMain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
