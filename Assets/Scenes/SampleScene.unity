@@ -2482,6 +2482,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 134760056}
     m_Modifications:
+    - target: {fileID: 10215084804183886, guid: 7fe018289d224e9459e71a570c2c63b1, type: 3}
+      propertyPath: _playerNumber
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2475163821292360124, guid: 7fe018289d224e9459e71a570c2c63b1, type: 3}
+      propertyPath: _typeRole
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2475163821292360124, guid: 7fe018289d224e9459e71a570c2c63b1, type: 3}
+      propertyPath: _playerNumber
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5196715025063621516, guid: 7fe018289d224e9459e71a570c2c63b1, type: 3}
       propertyPath: m_Pivot.x
       value: 1
@@ -2569,6 +2581,14 @@ PrefabInstance:
     - target: {fileID: 6292223031149311125, guid: 7fe018289d224e9459e71a570c2c63b1, type: 3}
       propertyPath: m_Name
       value: SecondPlayerBoard
+      objectReference: {fileID: 0}
+    - target: {fileID: 6835922428654992126, guid: 7fe018289d224e9459e71a570c2c63b1, type: 3}
+      propertyPath: _typeRole
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6835922428654992126, guid: 7fe018289d224e9459e71a570c2c63b1, type: 3}
+      propertyPath: _playerNumber
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
