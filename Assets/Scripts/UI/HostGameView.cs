@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.UI
 {
-    public class HostGameView : MonoBehaviour , IHostGameView
+    public class HostGameView : MonoBehaviour, IHostGameView
     {
         [SerializeField] private PreparationView _preparationView;
 

@@ -1,10 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEditor.ShaderKeywordFilter;
-using UnityEngine.UIElements;
 
 namespace Assets.Scripts.UI
 {
@@ -27,10 +22,13 @@ namespace Assets.Scripts.UI
         public event EventHandler<int> Player2_OnArcherAmountChanged;
         public event EventHandler<int> Player2_OnMageAmountChanged;
 
+        public event EventHandler<int> Player1_OnUnitAmountChanged;
+        public event EventHandler<int> Player2_OnUnitAmountChanged;
+
         public PreparationPresenter(IPreparationView view)
         {
             _view = view;
-            
+
 
 
             playersUnits.Add(new PlayerUnitsCollection());
@@ -43,17 +41,6 @@ namespace Assets.Scripts.UI
             playersUnits[1].OnWarriorAmountChanged += Player2_WarriorAmountChanged;
             playersUnits[1].OnArcherAmountChanged += Player2_ArcherAmountChanged;
             playersUnits[1].OnMageAmountChanged += Player2_MageAmountChanged;
-        }
-
-        ~PreparationPresenter()
-        {
-            playersUnits[0].OnWarriorAmountChanged -= Player1_WarriorAmountChanged;
-            playersUnits[0].OnArcherAmountChanged -= Player1_ArcherAmountChanged;
-            playersUnits[0].OnMageAmountChanged -= Player1_MageAmountChanged;
-
-            playersUnits[1].OnWarriorAmountChanged -= Player2_WarriorAmountChanged;
-            playersUnits[1].OnArcherAmountChanged -= Player2_ArcherAmountChanged;
-            playersUnits[1].OnMageAmountChanged -= Player2_MageAmountChanged;
         }
 
         public void Init(List<IDataPlayer> dataPlayers, int sizeField, UnitsConfig unitsConfig)
@@ -79,31 +66,37 @@ namespace Assets.Scripts.UI
         public void Player1_WarriorAmountChanged(object sender, int unitAmount)
         {
             Player1_OnWarriorAmountChanged?.Invoke(sender, unitAmount);
+            Player1_OnUnitAmountChanged?.Invoke(sender, _sizeField - playersUnits[0].AllUnits.Count);
         }
 
         public void Player1_ArcherAmountChanged(object sender, int unitAmount)
         {
             Player1_OnArcherAmountChanged?.Invoke(sender, unitAmount);
+            Player1_OnUnitAmountChanged?.Invoke(sender, _sizeField - playersUnits[0].AllUnits.Count);
         }
 
         public void Player1_MageAmountChanged(object sender, int unitAmount)
         {
             Player1_OnMageAmountChanged?.Invoke(sender, unitAmount);
+            Player1_OnUnitAmountChanged?.Invoke(sender, _sizeField - playersUnits[0].AllUnits.Count);
         }
 
         public void Player2_WarriorAmountChanged(object sender, int unitAmount)
         {
             Player2_OnWarriorAmountChanged?.Invoke(sender, unitAmount);
+            Player2_OnUnitAmountChanged?.Invoke(sender, _sizeField - playersUnits[1].AllUnits.Count);
         }
 
         public void Player2_ArcherAmountChanged(object sender, int unitAmount)
         {
             Player2_OnArcherAmountChanged?.Invoke(sender, unitAmount);
+            Player2_OnUnitAmountChanged?.Invoke(sender, _sizeField - playersUnits[1].AllUnits.Count);
         }
 
         public void Player2_MageAmountChanged(object sender, int unitAmount)
         {
             Player2_OnMageAmountChanged?.Invoke(sender, unitAmount);
+            Player2_OnUnitAmountChanged?.Invoke(sender, _sizeField - playersUnits[1].AllUnits.Count);
         }
     }
 }

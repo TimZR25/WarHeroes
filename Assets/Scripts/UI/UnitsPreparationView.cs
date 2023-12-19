@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -15,6 +11,13 @@ namespace Assets.Scripts.UI
         {
             get { return _playerName; }
             set { _playerName = value; }
+        }
+
+        [SerializeField] private TextMeshProUGUI _unitAmount;
+        public TextMeshProUGUI UnitAmount
+        {
+            get { return _unitAmount; }
+            set { _unitAmount = value; }
         }
 
         [SerializeField] private List<UnitPreparationView> units;

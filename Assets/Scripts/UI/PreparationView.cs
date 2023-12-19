@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Android;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.UI
@@ -22,6 +21,10 @@ namespace Assets.Scripts.UI
 
 
             _playButton.onClick.AddListener(PlayButtonClicked);
+
+            _presenter.Player1_OnUnitAmountChanged += Player1_UnitAmountChanged;
+            _presenter.Player2_OnUnitAmountChanged += Player2_UnitAmountChanged;
+
 
             for (int i = 0; i < _unitsPreparationViews.Count; i++)
             {
@@ -77,6 +80,9 @@ namespace Assets.Scripts.UI
         {
             _playButton.onClick.RemoveAllListeners();
 
+            _presenter.Player1_OnUnitAmountChanged -= Player1_UnitAmountChanged;
+            _presenter.Player2_OnUnitAmountChanged -= Player2_UnitAmountChanged;
+
             for (int i = 0; i < _unitsPreparationViews.Count; i++)
             {
                 for (int j = 0; j < _unitsPreparationViews[i].UnitPreparationViews.Count; j++)
@@ -108,14 +114,16 @@ namespace Assets.Scripts.UI
         {
             _presenter.Init(dataPlayers, sizeField, _unitsConfig);
 
-            InitUnits(dataPlayers);
+            InitUnits(dataPlayers, sizeField);
         }
 
-        private void InitUnits(List<IDataPlayer> dataPlayers)
+        private void InitUnits(List<IDataPlayer> dataPlayers, int sizeField)
         {
             for (int i = 0; i < dataPlayers.Count; i++)
             {
                 _unitsPreparationViews[i].PlayerName.text = dataPlayers[i].Name;
+                _unitsPreparationViews[i].UnitAmount.text = "Можно взять: " + sizeField.ToString();
+
                 for (int j = 0; j < _unitsPreparationViews[i].UnitPreparationViews.Count; j++)
                 {
                     IUnitPreparationView unitPreparationView = _unitsPreparationViews[i].UnitPreparationViews[j];
@@ -141,6 +149,16 @@ namespace Assets.Scripts.UI
         public void MinusButtonClicked(object sender, IUnitPreparationView unitPreparationView)
         {
             _presenter.RemoveUnit(unitPreparationView);
+        }
+
+        public void Player1_UnitAmountChanged(object sender, int amount)
+        {
+            _unitsPreparationViews[0].UnitAmount.text = "Можно взять: " + amount.ToString();
+        }
+
+        public void Player2_UnitAmountChanged(object sender, int amount)
+        {
+            _unitsPreparationViews[1].UnitAmount.text = "Можно взять: " + amount.ToString();
         }
     }
 }

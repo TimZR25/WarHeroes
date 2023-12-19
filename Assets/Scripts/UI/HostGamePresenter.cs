@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.UIElements;
 
 namespace Assets.Scripts.UI
 {
     public class HostGamePresenter
     {
-        private IHostGameView _view; 
+        private IHostGameView _view;
 
         private string _errorText;
 
