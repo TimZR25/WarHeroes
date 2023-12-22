@@ -8,6 +8,6 @@ using System.Threading.Tasks;
 public interface IPassiveAbility : IAbility
 {
     public void Execute();
-
     public IUnit Unit { get; set; }
 }
+

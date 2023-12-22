@@ -1,5 +1,5 @@
-﻿
-public enum TypeFaction
+﻿public enum TypeFaction
 {
     HUMANS, ORCS, UNDEADS
 }
+

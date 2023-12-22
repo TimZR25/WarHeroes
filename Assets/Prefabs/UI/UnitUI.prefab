@@ -32,10 +32,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1329435235104668070}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6594643175987978661
 CanvasRenderer:
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1006027384, guid: 8b548bfbc6e2aef4a810c4301fd7a92c, type: 3}
+  m_Sprite: {fileID: -1509028993, guid: 2db29dd96437a4b4eac24355f4ec39a5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -261,7 +261,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2081709601, guid: 8b548bfbc6e2aef4a810c4301fd7a92c, type: 3}
+  m_Sprite: {fileID: -1200193351, guid: 2db29dd96437a4b4eac24355f4ec39a5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -577,6 +577,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3780e5ddb3d1274696bc8186c7df0ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerNumber: 0
+  _typeRole: 0
   _image: {fileID: 8087534066674133877}
   _minusButton: {fileID: 8103723285544669253}
   _plusButton: {fileID: 478068770083793285}

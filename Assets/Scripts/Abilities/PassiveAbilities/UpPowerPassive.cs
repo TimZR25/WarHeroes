@@ -6,20 +6,29 @@ using System.Threading.Tasks;
 
 public class UpPowerPassive : IPassiveAbility
 {
-    public string Description { get; set; }
+    private IUnit _unit;
+    private string _description;
+    public decimal Coefficient => (decimal)1.1;
+    public IUnit Unit
+    {
+        get { return _unit; }
+        set { if (_unit == null) throw new ArgumentNullException("Unit не может быть null"); _unit = value; }
+    }
 
-    public decimal Multiplier => (decimal)1.1;
+    public string Description
+    {
+        get { return _description; }
+        set { if (string.IsNullOrEmpty(value)) throw new ArgumentException("Description не может быть null или empty"); _description = value; }
+    }
 
-    public IUnit Unit { get; set; }
-
-    public UpPowerPassive(IUnit unit)
+    public UpPowerPassive(IUnit unit, string description)
     {
         Unit = unit;
-        Description = "Повышает мощность каждый ход";
+        Description = description;
     }
 
     public void Execute()
     {
-        Unit.Stats.Power = Unit.Stats.Power * Multiplier;
+        Unit.Stats.Power = Unit.Stats.Power * Coefficient;
     }
 }

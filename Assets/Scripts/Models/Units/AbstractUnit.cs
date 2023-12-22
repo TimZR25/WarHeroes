@@ -10,40 +10,39 @@ public abstract class AbstractUnit : IUnit
     public event EventHandler<IUnit> OnDead;
 
 
-    public event EventHandler OnTurnCompleted;
+    public event EventHandler<IUnit> OnTurnCompleted;
 
-    private bool isMoved = false;
-
-    public AbstractUnit(IUnitStats unitStats)
-    {
-        Stats = unitStats;
-    }
+    private bool _isMoved = false;
 
     public void UseActiveAbility(IActiveAbility ability, ICell cell)
     {
-        if (Stats.CurrentEnergy < ability.Сost) return;
+        if (cell == CellParent) return;
+        if (Stats.CurrentEnergy < ability.Cost) return;
 
-        isMoved = false;
+        _isMoved = false;
+        if(cell.Unit != null)
+        {
+            decimal amount = ability.Execute(Stats.Power);
+            if (amount < 0) cell.Unit.ApplyDamage(amount);
+            if (amount > 0) cell.Unit.ApplyHealth(amount);
 
-        decimal amount = ability.Execute(Stats.Power);
+        }
 
-        if (amount < 0) cell.Unit.ApplyDamage(amount);
-        if (amount > 0) ApplyHealth(amount);
-
-        OnTurnCompleted?.Invoke(this, EventArgs.Empty);
+        OnTurnCompleted?.Invoke(this, this);
     }
 
     public bool TryMove(ICell cell, IField field)
     {
-        if (isMoved == true) throw new Exception("Юнит уже походил");
+        if (_isMoved == true) return false; ;
         if (cell?.Unit != null) return false;
-            
+        if (cell?.Obstacle != null) return false;
+
         if (field.GetNeighborsRadius(CellParent, Stats.DistanceOfMove).Contains(cell))
         {
             CellParent.Unit = null;
             cell.Unit = this;
 
-            isMoved = true;
+            _isMoved = true;
             return true;
         }
 
@@ -82,17 +81,17 @@ public abstract class AbstractUnit : IUnit
 
     public void SkipTurn() {
 
-        if (isMoved == false)
+        if (_isMoved == false)
         {
             if (Stats.MaxEnergy >= Stats.CurrentEnergy + Stats.MaxEnergy * (decimal)0.2) { Stats.CurrentEnergy = Stats.MaxEnergy; }
             else { Stats.CurrentEnergy += Stats.MaxEnergy * (decimal)0.2; }
         }
         else
         {
-            isMoved = false;
+            _isMoved = false;
         }
 
-        OnTurnCompleted?.Invoke(this, EventArgs.Empty);
+        OnTurnCompleted?.Invoke(this, this);
     }
 
     public void ApplyPassiveAbilities() {

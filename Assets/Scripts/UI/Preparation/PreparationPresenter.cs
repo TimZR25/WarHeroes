@@ -10,8 +10,8 @@ namespace Assets.Scripts.UI
         public List<PlayerUnitsCollection> PlayersUnits { set; get; }
 
         private List<IDataPlayer> _dataPlayers;
-        private int _sizeField;
 
+        private GameConfig _gameConfig;
         private UnitsConfig _unitsConfig;
 
         public event EventHandler<int> Player1_OnWarriorAmountChanged;
@@ -25,16 +25,29 @@ namespace Assets.Scripts.UI
         public event EventHandler<int> Player1_OnUnitAmountChanged;
         public event EventHandler<int> Player2_OnUnitAmountChanged;
 
+        public List<IPlayer> Players
+        {
+            get
+            {
+                List<IPlayer> players = new List<IPlayer>();
+
+                for (int i = 0; i < _dataPlayers.Count; i++)
+                    players.Add(new Player(_dataPlayers[i].Name, PlayersUnits[i].AllUnits));
+
+                return players;
+            }
+        }
+
         public PreparationPresenter(IPreparationView view)
         {
             _view = view;
         }
 
-        public void Init(List<IDataPlayer> dataPlayers, int sizeField, UnitsConfig unitsConfig)
+        public void Init(List<IDataPlayer> dataPlayers, GameConfig gameConfig, UnitsConfig spritesConfig)
         {
             _dataPlayers = dataPlayers;
-            _sizeField = sizeField;
-            _unitsConfig = unitsConfig;
+            _gameConfig = gameConfig;
+            _unitsConfig = spritesConfig;
 
             PlayersUnits = new List<PlayerUnitsCollection>
             {
@@ -53,7 +66,7 @@ namespace Assets.Scripts.UI
 
         public void AddUnit(IUnitPreparationView unitPreparationView)
         {
-            if (PlayersUnits[(int)unitPreparationView.PlayerNumber].AllUnits.Count >= _sizeField)
+            if (PlayersUnits[(int)unitPreparationView.PlayerNumber].AllUnits.Count >= _gameConfig.FieldHeight)
                 return;
 
             PlayersUnits[(int)unitPreparationView.PlayerNumber].AddUnit(unitPreparationView.TypeRole);
@@ -67,37 +80,37 @@ namespace Assets.Scripts.UI
         public void Player1_WarriorAmountChanged(object sender, int unitAmount)
         {
             Player1_OnWarriorAmountChanged?.Invoke(sender, unitAmount);
-            Player1_OnUnitAmountChanged?.Invoke(sender, _sizeField - PlayersUnits[0].AllUnits.Count);
+            Player1_OnUnitAmountChanged?.Invoke(sender, _gameConfig.FieldHeight - PlayersUnits[0].AllUnits.Count);
         }
 
         public void Player1_ArcherAmountChanged(object sender, int unitAmount)
         {
             Player1_OnArcherAmountChanged?.Invoke(sender, unitAmount);
-            Player1_OnUnitAmountChanged?.Invoke(sender, _sizeField - PlayersUnits[0].AllUnits.Count);
+            Player1_OnUnitAmountChanged?.Invoke(sender, _gameConfig.FieldHeight - PlayersUnits[0].AllUnits.Count);
         }
 
         public void Player1_MageAmountChanged(object sender, int unitAmount)
         {
             Player1_OnMageAmountChanged?.Invoke(sender, unitAmount);
-            Player1_OnUnitAmountChanged?.Invoke(sender, _sizeField - PlayersUnits[0].AllUnits.Count);
+            Player1_OnUnitAmountChanged?.Invoke(sender, _gameConfig.FieldHeight - PlayersUnits[0].AllUnits.Count);
         }
 
         public void Player2_WarriorAmountChanged(object sender, int unitAmount)
         {
             Player2_OnWarriorAmountChanged?.Invoke(sender, unitAmount);
-            Player2_OnUnitAmountChanged?.Invoke(sender, _sizeField - PlayersUnits[1].AllUnits.Count);
+            Player2_OnUnitAmountChanged?.Invoke(sender, _gameConfig.FieldHeight - PlayersUnits[1].AllUnits.Count);
         }
 
         public void Player2_ArcherAmountChanged(object sender, int unitAmount)
         {
             Player2_OnArcherAmountChanged?.Invoke(sender, unitAmount);
-            Player2_OnUnitAmountChanged?.Invoke(sender, _sizeField - PlayersUnits[1].AllUnits.Count);
+            Player2_OnUnitAmountChanged?.Invoke(sender, _gameConfig.FieldHeight - PlayersUnits[1].AllUnits.Count);
         }
 
         public void Player2_MageAmountChanged(object sender, int unitAmount)
         {
             Player2_OnMageAmountChanged?.Invoke(sender, unitAmount);
-            Player2_OnUnitAmountChanged?.Invoke(sender, _sizeField - PlayersUnits[1].AllUnits.Count);
+            Player2_OnUnitAmountChanged?.Invoke(sender, _gameConfig.FieldHeight - PlayersUnits[1].AllUnits.Count);
         }
     }
 }

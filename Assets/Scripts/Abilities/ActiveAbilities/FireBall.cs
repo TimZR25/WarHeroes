@@ -4,21 +4,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 public class FireBall : IActiveAbility
 {
-    public string Description { get; set; }
-
-    public int Сost { get; set; }
-
-    public decimal Multiplier => 5; 
-    
-    public FireBall(int сost)
+    private int _cost;
+    private string _description;
+    public string Description
     {
-        Description = "Огненный шар наносит много урона";
-        Сost = сost;
+        get { return _description; }
+        set { if (string.IsNullOrEmpty(value)) throw new ArgumentException("Description не может быть null или empty"); _description = value; }
     }
+    public int Cost
+    {
+        get { return _cost; }
+        set { if (value < 0) throw new ArgumentOutOfRangeException("Cost не может быть отрицательным"); _cost = value; }
+    }
+
+    public decimal Coefficient => 5;
+
+    public FireBall(int cost, string description)
+    {
+        Description = description;
+        Cost = cost;
+    }
+
     public decimal Execute(decimal power)
     {
-        return -power * Multiplier;
+        return -power * Coefficient;
     }
 }
+

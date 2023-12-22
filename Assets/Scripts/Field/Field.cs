@@ -9,17 +9,19 @@ public class Field : IField
 {
     private ICell[,] _field;
 
-    private int _sizeSide;
+    private int _fieldWidth;
+    private int _fieldHeight;
 
-    public Field(int sizeSide)
+    public Field(int fieldWidth, int fieldHeight)
     {
-        _sizeSide = sizeSide;
+        _fieldWidth = fieldWidth;
+        _fieldHeight = fieldHeight;
 
-        _field = new ICell[_sizeSide, _sizeSide];
+        _field = new ICell[_fieldWidth, _fieldHeight];
 
-        for (int x = 0; x < _sizeSide; x++)
+        for (int x = 0; x < _fieldWidth; x++)
         {
-            for (int y = 0; y < _sizeSide; y++)
+            for (int y = 0; y < _fieldHeight; y++)
             {
                 ICell cell = new Cell(x, y);
                 _field[x, y] = cell;
@@ -48,7 +50,7 @@ public class Field : IField
 
     public ICell GetCell(int x, int y)
     {
-        if (x > _sizeSide || y > _sizeSide || x < 0 || y < 0) {
+        if (x > _fieldWidth || y > _fieldHeight || x < 0 || y < 0) {
             throw new ArgumentOutOfRangeException("Некорректные координаты для получения клетки");
         }
 
@@ -66,9 +68,9 @@ public class Field : IField
 
     private void AddNeighborsAll()
     {
-        for (int x = 0; x < _sizeSide; x++)
+        for (int x = 0; x < _fieldWidth; x++)
         {
-            for (int y = 0; y < _sizeSide; y++)
+            for (int y = 0; y < _fieldHeight; y++)
             {
                 AddNeighbors(x, y);
             }
@@ -84,9 +86,9 @@ public class Field : IField
 
     private void AddNeighbors(int x, int y)
     {
-        foreach (int dx in Shifts(x, _sizeSide))
+        foreach (int dx in Shifts(x, _fieldWidth))
         {
-            foreach (int dy in Shifts(y, _sizeSide))
+            foreach (int dy in Shifts(y, _fieldHeight))
             {
                 if ((dx == 0) && (dy == 0))
                     continue;
@@ -100,8 +102,10 @@ public class Field : IField
         if (cell == null) throw new ArgumentNullException("Пустая ссылка на клетку");
         if (radius < 1) throw new ArgumentOutOfRangeException("Радиус не может быть меньше 1");
 
-        HashSet<ICell> result = new HashSet<ICell>(cell.Neighbors);
-        result.Add(cell);
+        HashSet<ICell> result = new HashSet<ICell>(cell.Neighbors)
+        {
+            cell
+        };
 
         int count = 1;
 

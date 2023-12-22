@@ -14,6 +14,8 @@ public interface IUnitStats
 
     public decimal Power { get; set; }
 
+    public int MaxArmor { get; set; }
+
     public int Armor { get; set; }
 
     public int DistanceOfMove { get; set; }

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public interface IObstacle : IModel
+public interface IObstacle
 {
     public string Description { get; set; }
 }

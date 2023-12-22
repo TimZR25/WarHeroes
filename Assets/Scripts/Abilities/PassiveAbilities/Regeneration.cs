@@ -6,21 +6,31 @@ using System.Threading.Tasks;
 
 public class Regeneration : IPassiveAbility
 {
-    public IUnit Unit { get; set; }
+    private IUnit _unit;
+    private string _description;
+    public decimal Coefficient => (decimal)1.2;
+    public IUnit Unit 
+    {
+        get { return _unit; }
+        set { if (_unit == null) throw new ArgumentNullException("Unit не может быть null"); _unit = value; }
+    }
 
-    public string Description { get; set; }
+    public string Description
+    {
+        get { return _description; }
+        set { if (string.IsNullOrEmpty(value)) throw new ArgumentException("Description не может быть null или empty"); _description = value; }
+    }
 
-    public decimal Multiplier => (decimal)1.2;
 
-    public Regeneration(IUnit unit)
+    public Regeneration(IUnit unit, string description)
     {
         Unit = unit;
-        Description = "Регенерация здоровья каждый ход";
+        Description = description;
     }
 
     public void Execute()
     {
-        if (Unit.Stats.Power * Multiplier + Unit.Stats.CurrentHealth >= Unit.Stats.MaxHealth) { Unit.Stats.CurrentHealth = Unit.Stats.MaxHealth; }
-        else { Unit.Stats.CurrentHealth = Unit.Stats.Power * Multiplier + Unit.Stats.CurrentHealth; }
+        if (Unit.Stats.Power * Coefficient + Unit.Stats.CurrentHealth >= Unit.Stats.MaxHealth) { Unit.Stats.CurrentHealth = Unit.Stats.MaxHealth; }
+        else { Unit.Stats.CurrentHealth = Unit.Stats.Power * Coefficient + Unit.Stats.CurrentHealth; }
     }
 }

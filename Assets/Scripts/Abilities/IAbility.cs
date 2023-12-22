@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 public interface IAbility
 {
-    public decimal Multiplier { get; }
+    public decimal Coefficient { get; }
     public string Description { get; set; }
 }
 
