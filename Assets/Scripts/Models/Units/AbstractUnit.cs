@@ -2,13 +2,11 @@
 
 public abstract class AbstractUnit : IUnit
 {
-
     public IUnitStats Stats { get; set; }
 
     public ICell CellParent { get; set; }
 
     public event EventHandler<IUnit> OnDead;
-
 
     public event EventHandler<IUnit> OnTurnCompleted;
 
@@ -95,7 +93,7 @@ public abstract class AbstractUnit : IUnit
     }
 
     public void ApplyPassiveAbilities() {
-        if (Stats.PassiveAbilities.Count <= 1 || Stats.PassiveAbilities == null) { return; }
+        if (Stats.PassiveAbilities.Count <= 1 || Stats.PassiveAbilities == null) return;
 
         foreach (IPassiveAbility passiveAbility in Stats.PassiveAbilities) {
             passiveAbility.Execute();

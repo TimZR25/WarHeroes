@@ -46,8 +46,7 @@ public class UnitsConfig : ScriptableObject
 [Serializable]
 public class UnitConfig : IUnitStats
 {
-    [SerializeField] private int _id;
-    public int ID => _id;
+    [field: SerializeField] public int ID { get; set; }
 
     [field: SerializeField] public string Name { get; set; }
 
@@ -68,6 +67,6 @@ public class UnitConfig : IUnitStats
     [field: SerializeField] public decimal MaxEnergy { get; set; }
     [field: SerializeField] public decimal CurrentEnergy { get; set; }
 
-    [field: SerializeField] public List<IPassiveAbility> PassiveAbilities { get; set; }
-    [field: SerializeField] public List<IActiveAbility> ActiveAbilities { get; set; }
+    [field: SerializeField] public List<IPassiveAbility> PassiveAbilities { get; set; } = new List<IPassiveAbility>();
+    [field: SerializeField] public List<IActiveAbility> ActiveAbilities { get; set; } = new List<IActiveAbility>();
 }

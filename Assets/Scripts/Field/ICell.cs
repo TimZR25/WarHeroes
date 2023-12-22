@@ -10,4 +10,5 @@ public interface ICell
     public IObstacle Obstacle { get; set; }
     public IUnit Unit { get; set; }
     public List<ICell> Neighbors { get; set; }
+    public event EventHandler<int> OnModelChanged;
 }

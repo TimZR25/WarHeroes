@@ -7,6 +7,11 @@ using System.Threading.Tasks;
 
 public interface IField
 {
+    public ICell[,] Cells { get; }
+
+    public int Width { get; }
+    public int Height { get; }
+
     public void AddUnit(IUnit model, int x, int y);
     public void AddObstacle(IObstacle model, int x, int y);
     public void ClearField();

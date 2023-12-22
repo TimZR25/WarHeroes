@@ -12,12 +12,20 @@ public class CombatView : MonoBehaviour, ICombatView
 
     [SerializeField] private CellView _cellView;
 
-    [field: SerializeField] public Button AbilityButton {  get; set; }
-    [field: SerializeField] public Button MoveButton { get; set; }
-    [field: SerializeField] public Button SkipButton { get; set; }
-    [field: SerializeField] public Button PauseButton { get; set; }
+    [SerializeField] private Button _abilityButton;
+    public Button AbilityButton => _abilityButton;
+
+    [SerializeField] private Button _moveButton;
+    public Button MoveButton => _moveButton;
+
+    [SerializeField] private Button _skipButton;
+    public Button SkipButton => _skipButton;
+
+    [SerializeField] private Button _pauseButton;
+    public Button PauseButton => _pauseButton;
 
     private CellView[,] _cellViews;
+    public CellView[,] CellsViews => _cellViews;
 
     private CombatPresenter _presenter;
 
@@ -25,9 +33,7 @@ public class CombatView : MonoBehaviour, ICombatView
     {
         CreateFieldView(_gameConfig.FieldWidth, _gameConfig.FieldHeight);
 
-        _presenter = new CombatPresenter(_gameConfig, players);
-
-        SubscribeCells();
+        _presenter = new CombatPresenter(this, _gameConfig, players);
     }
 
     private void CreateFieldView(int width, int height)
@@ -47,18 +53,9 @@ public class CombatView : MonoBehaviour, ICombatView
                 {
                     _cellViews[i, j] = tileView;
                     tileView.Init(i, j);
-                }
-            }
-        }
-    }
 
-    private void SubscribeCells()
-    {
-        for (int x = 0; x < _cellViews.GetLength(0); x++)
-        {
-            for (int y = 0; y < _cellViews.GetLength(1); y++)
-            {
-                _cellViews[x, y].OnClicked += _presenter.TileClicked;
+                    if (i > width / 2) tileView.Flip(true);
+                }
             }
         }
     }

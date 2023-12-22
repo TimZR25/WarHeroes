@@ -1745,7 +1745,7 @@ GameObject:
   - component: {fileID: 1175920908}
   - component: {fileID: 1175920907}
   m_Layer: 5
-  m_Name: PauseButton
+  m_Name: SkipButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2840,7 +2840,7 @@ GameObject:
   - component: {fileID: 1623041488}
   - component: {fileID: 1623041487}
   m_Layer: 5
-  m_Name: SkipButton
+  m_Name: PauseButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3205,15 +3205,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1853194216}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a14ae7bea77df2144873d264c796aa3f, type: 3}
+  m_Script: {fileID: 11500000, guid: 1afd8e9ad4dbe8649b977b65ed61873e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _gameConfig: {fileID: 11400000, guid: 05a13f9a36865de40b78b241773becc5, type: 2}
   _cellView: {fileID: 3847488202550893873, guid: 7035f61f33462fe4cb62db3033bb324f, type: 3}
-  <AbilityButton>k__BackingField: {fileID: 1460475056}
-  <MoveButton>k__BackingField: {fileID: 2006948581}
-  <SkipButton>k__BackingField: {fileID: 1623041487}
-  <PauseButton>k__BackingField: {fileID: 1175920907}
+  _abilityButton: {fileID: 1460475056}
+  _moveButton: {fileID: 2006948581}
+  _skipButton: {fileID: 1175920907}
+  _pauseButton: {fileID: 1623041487}
 --- !u!1 &1875773545
 GameObject:
   m_ObjectHideFlags: 0

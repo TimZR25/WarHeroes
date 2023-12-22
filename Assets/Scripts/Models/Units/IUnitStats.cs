@@ -2,6 +2,8 @@
 
 public interface IUnitStats
 {
+    public int ID { get; set; }
+
     public string Name { get; set; }
 
     public decimal MaxHealth {  get; set; }

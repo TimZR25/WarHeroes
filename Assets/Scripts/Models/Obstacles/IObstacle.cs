@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 public interface IObstacle
 {
+    public int ID { get; set; }
     public string Description { get; set; }
 }
 

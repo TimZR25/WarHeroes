@@ -8,8 +8,8 @@ public class CombatManager : ICombatManager
     private List<IPlayer> _players;
     private IRoundManager _roundManager;
     public IUnit CurrentUnit { get; set; }
-    public List<IUnit> UnitsCanTakeAction { get; set; }
-    public PriorityQueue<IUnit, int> UnitsPriorityQueue { get; set; }
+    public List<IUnit> UnitsCanTakeAction { get; set; } = new List<IUnit>();
+    public PriorityQueue<IUnit, int> UnitsPriorityQueue { get; set; } = new PriorityQueue<IUnit, int>();
     public IPlayer CurrentPlayer { get; set; }
 
     public event EventHandler<IPlayer> OnPlayerLose;
@@ -90,6 +90,18 @@ public class CombatManager : ICombatManager
         ChangeCurrentPlayer();
     }
 
+    public void StartGame()
+    {
+        RoundManager.NextRound();
+
+        ChangeUnitsCanTakeAction();
+
+        RebuildQueue();
+
+        CurrentUnit = UnitsPriorityQueue.Dequeue();
+        ChangeCurrentPlayer();
+    }
+
     public void RemoveDeadUnitFromField(object sender, IUnit unit) {
         foreach (IPlayer player in Players)
         {
@@ -117,7 +129,7 @@ public class CombatManager : ICombatManager
         }
     }
 
-    public void ApplyAllPassiveAbilities() {
+    private void ApplyAllPassiveAbilities() {
         foreach (IUnit unit in GetAllUnits()) {
             unit.ApplyPassiveAbilities();
         }

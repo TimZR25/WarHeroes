@@ -9,8 +9,21 @@ using System.Threading.Tasks;
 
 public class Cell : ICell
 {
+    private IObstacle _obstacle;
     private IUnit _unit;
-    public IObstacle Obstacle { get; set; }
+
+    public event EventHandler<int> OnModelChanged;
+
+    public IObstacle Obstacle
+    {
+        get { return _obstacle; }
+        set
+        {
+            _obstacle = value;
+            OnModelChanged(this, _obstacle.ID);
+        }
+    }
+
     public List<ICell> Neighbors { get; set; }       
     public IUnit Unit
     {
@@ -18,11 +31,20 @@ public class Cell : ICell
         set
         {
             _unit = value;
+            
+
+            if (_unit == null)
+            {
+                OnModelChanged?.Invoke(this, 999);
+                return;
+            }
+
             _unit.CellParent = this;
+            OnModelChanged?.Invoke(this, _unit.Stats.ID);
         }
     }
 
-    public Cell(int x, int y)
+    public Cell()
     {
         Neighbors = new List<ICell>();
     }

@@ -9,9 +9,11 @@ namespace Assets.Scripts.UI.Combat
 {
     public interface ICombatView : IView
     {
-        public Button AbilityButton { get; set; }
-        public Button MoveButton { get; set; }
-        public Button SkipButton { get; set; }
-        public Button PauseButton { get; set; }
+        public Button AbilityButton { get; }
+        public Button MoveButton { get; }
+        public Button SkipButton { get; }
+        public Button PauseButton { get; }
+
+        public CellView[,] CellsViews { get; }
     }
 }

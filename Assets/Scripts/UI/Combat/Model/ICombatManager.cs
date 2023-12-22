@@ -12,5 +12,6 @@ public interface ICombatManager
     public void ChangeCurrentPlayer();
     public void ChangeUnitsCanTakeAction();
     public void RebuildQueue();
+    public void StartGame();
 }
 
