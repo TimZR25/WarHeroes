@@ -1,4 +1,5 @@
 ﻿using System;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 
 public abstract class AbstractUnit : IUnit
 {
@@ -24,6 +25,8 @@ public abstract class AbstractUnit : IUnit
             if (amount < 0) cell.Unit.ApplyDamage(amount);
             if (amount > 0) cell.Unit.ApplyHealth(amount);
 
+            if (Stats.CurrentEnergy - ability.Cost <= 0) Stats.CurrentEnergy = 0;
+            else Stats.CurrentEnergy -= ability.Cost;
         }
 
         OnTurnCompleted?.Invoke(this, this);
@@ -49,19 +52,19 @@ public abstract class AbstractUnit : IUnit
 
     public void ApplyDamage(decimal damageAmount)
     {
-        decimal multiplier = (1 - Stats.Armor);
-        if (Stats.CurrentHealth - (multiplier * damageAmount) <= 0)
+        decimal multiplier = (decimal)(1 - Stats.Armor/100d);
+        if (Stats.CurrentHealth + (multiplier * damageAmount) <= 0)
         {
             Die();
             return;
         }
 
-        Stats.CurrentHealth -= damageAmount * multiplier;
+        Stats.CurrentHealth += damageAmount * multiplier;
     }
 
     public void ApplyHealth(decimal healthAmount)
     {
-        if (Stats.MaxHealth > Stats.CurrentHealth + healthAmount)
+        if (Stats.CurrentHealth + healthAmount >= Stats.MaxHealth)
         {
             Stats.CurrentHealth = Stats.MaxHealth;
             return;
@@ -81,7 +84,7 @@ public abstract class AbstractUnit : IUnit
 
         if (_isMoved == false)
         {
-            if (Stats.MaxEnergy >= Stats.CurrentEnergy + Stats.MaxEnergy * (decimal)0.2) { Stats.CurrentEnergy = Stats.MaxEnergy; }
+            if (Stats.CurrentEnergy + Stats.MaxEnergy * (decimal)0.2 >= Stats.MaxEnergy) { Stats.CurrentEnergy = Stats.MaxEnergy; }
             else { Stats.CurrentEnergy += Stats.MaxEnergy * (decimal)0.2; }
         }
         else

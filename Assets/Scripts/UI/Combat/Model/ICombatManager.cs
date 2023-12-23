@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine.EventSystems;
 
 public interface ICombatManager
 {
@@ -13,5 +15,6 @@ public interface ICombatManager
     public void ChangeUnitsCanTakeAction();
     public void RebuildQueue();
     public void StartGame();
+    public event EventHandler OnCurrentUnitChanged;
 }
 

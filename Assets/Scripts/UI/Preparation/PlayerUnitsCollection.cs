@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.Abilities.ActiveAbilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
@@ -30,6 +31,7 @@ namespace Assets.Scripts.UI
         public PlayerUnitsCollection(UnitsConfig unitsConfig, TypeFaction typeFaction)
         {
             _unitStats = unitsConfig.GetByFaction(typeFaction);
+
             _factoryUnits = new FactoriesUnitsFactory().CreateFactory(typeFaction);
         }
 

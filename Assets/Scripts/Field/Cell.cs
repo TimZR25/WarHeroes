@@ -13,6 +13,8 @@ public class Cell : ICell
     private IUnit _unit;
 
     public event EventHandler<int> OnModelChanged;
+    public event EventHandler OnSelected;
+    public event EventHandler OnDeselected;
 
     public IObstacle Obstacle
     {
@@ -24,7 +26,7 @@ public class Cell : ICell
         }
     }
 
-    public List<ICell> Neighbors { get; set; }       
+    public List<ICell> Neighbors { get; set; } = new List<ICell>();  
     public IUnit Unit
     {
         get { return _unit; }
@@ -44,8 +46,13 @@ public class Cell : ICell
         }
     }
 
-    public Cell()
+    public void Select()
     {
-        Neighbors = new List<ICell>();
+        OnSelected?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void Deselect()
+    {
+        OnDeselected?.Invoke(this, EventArgs.Empty);
     }
 }

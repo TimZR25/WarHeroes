@@ -4,15 +4,32 @@ using System.Linq;
 
 public class CombatManager : ICombatManager
 {
-    private IField _gameField;
-    private List<IPlayer> _players;
     private IRoundManager _roundManager;
-    public IUnit CurrentUnit { get; set; }
+
+    private IField _gameField;
+
+    private List<IPlayer> _players;
+
+    public IPlayer CurrentPlayer { get; set; }
+    private IUnit _currentUnit;
+    public IUnit CurrentUnit
+    {
+        get { return _currentUnit; }
+        set
+        {
+            _currentUnit = value;
+            OnCurrentUnitChanged?.Invoke(this, EventArgs.Empty);
+        }
+    }
+    
     public List<IUnit> UnitsCanTakeAction { get; set; } = new List<IUnit>();
     public PriorityQueue<IUnit, int> UnitsPriorityQueue { get; set; } = new PriorityQueue<IUnit, int>();
-    public IPlayer CurrentPlayer { get; set; }
+    
 
     public event EventHandler<IPlayer> OnPlayerLose;
+    public event EventHandler OnCurrentUnitChanged;
+
+
     public IField GameField
     {
         get { return _gameField; }

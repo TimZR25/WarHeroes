@@ -1,3 +1,4 @@
+using Assets.Scripts.Configs;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -52,21 +53,26 @@ public class UnitConfig : IUnitStats
 
     [field: SerializeField, TextArea] public string Description { get; set; }
 
-    [field: SerializeField] public decimal MaxHealth { get; set; }
-    [field: SerializeField] public decimal CurrentHealth { get; set; }
+    [SerializeField] private double _maxHealth;
+    public decimal MaxHealth { get => (decimal)_maxHealth; set { } }
 
-    [field: SerializeField] public decimal Power { get; set; }
+    public decimal CurrentHealth { get; set; }
+
+    [SerializeField] private double _power;
+    public decimal Power { get => (decimal)_power; set { } }
 
     [field: SerializeField] public int MaxArmor { get; set; }
-    [field: SerializeField] public int Armor { get; set; }
+    public int Armor { get; set; }
 
     [field: SerializeField] public int DistanceOfMove { get; set; }
     [field: SerializeField] public int Initiative { get; set; }
 
-    [field: SerializeField] public int AmountEnergy { get; set; }
-    [field: SerializeField] public decimal MaxEnergy { get; set; }
-    [field: SerializeField] public decimal CurrentEnergy { get; set; }
+    [SerializeField] private double _maxEnergy;
+    public decimal MaxEnergy { get => (decimal)_maxEnergy; set { } }
 
-    [field: SerializeField] public List<IPassiveAbility> PassiveAbilities { get; set; } = new List<IPassiveAbility>();
-    [field: SerializeField] public List<IActiveAbility> ActiveAbilities { get; set; } = new List<IActiveAbility>();
+    public decimal CurrentEnergy { get; set; }
+
+    public UnitAbilitiesConfig AbilitiesConfig;
+    public List<IPassiveAbility> PassiveAbilities { get => AbilitiesConfig.PassiveAbilities; set { } }
+    public List<IActiveAbility> ActiveAbilities { get => AbilitiesConfig.ActiveAbilities; set { } }
 }

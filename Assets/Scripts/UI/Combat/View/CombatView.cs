@@ -54,7 +54,7 @@ public class CombatView : MonoBehaviour, ICombatView
                     _cellViews[i, j] = tileView;
                     tileView.Init(i, j);
 
-                    if (i > width / 2) tileView.Flip(true);
+                    if (i >= width / 2) tileView.Flip(true);
                 }
             }
         }
