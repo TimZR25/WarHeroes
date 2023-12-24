@@ -41,8 +41,9 @@ namespace Assets.Scripts.Abilities.ActiveAbilities
         }
 
 
-        public AbstractActiveAbility(int cost, string description, decimal coefficient, bool isHeal)
+        public AbstractActiveAbility(int cost, string description, decimal coefficient, bool isHeal, int range)
         {
+            Range = range;
             Description = description;
             Cost = cost;
             Coefficient = coefficient;

@@ -13,8 +13,11 @@ public class RoundManager : IRoundManager
         Round = 0;
     }
 
+    public event EventHandler<int> OnRoundChanged;
+
     public void NextRound()
     {
         Round++;
+        OnRoundChanged?.Invoke(this, Round);
     }
 }

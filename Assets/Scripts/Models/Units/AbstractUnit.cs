@@ -13,10 +13,10 @@ public abstract class AbstractUnit : IUnit
 
     private bool _isMoved = false;
 
-    public void UseActiveAbility(IActiveAbility ability, ICell cell)
+    public bool TryUseActiveAbility(IActiveAbility ability, ICell cell)
     {
-        if (cell == CellParent) return;
-        if (Stats.CurrentEnergy < ability.Cost) return;
+        if (cell == CellParent) return false;
+        if (Stats.CurrentEnergy < ability.Cost) return false;
 
         _isMoved = false;
         if(cell.Unit != null)
@@ -27,9 +27,14 @@ public abstract class AbstractUnit : IUnit
 
             if (Stats.CurrentEnergy - ability.Cost <= 0) Stats.CurrentEnergy = 0;
             else Stats.CurrentEnergy -= ability.Cost;
+
+            OnTurnCompleted?.Invoke(this, this);
+
+            return true;
         }
 
-        OnTurnCompleted?.Invoke(this, this);
+
+        return false;
     }
 
     public bool TryMove(ICell cell, IField field)
@@ -40,6 +45,7 @@ public abstract class AbstractUnit : IUnit
 
         if (field.GetNeighborsRadius(CellParent, Stats.DistanceOfMove).Contains(cell))
         {
+            CellParent.Deselect();
             CellParent.Unit = null;
             cell.Unit = this;
 
@@ -96,10 +102,10 @@ public abstract class AbstractUnit : IUnit
     }
 
     public void ApplyPassiveAbilities() {
-        if (Stats.PassiveAbilities.Count <= 1 || Stats.PassiveAbilities == null) return;
+        if (Stats.PassiveAbilities == null) return;
 
         foreach (IPassiveAbility passiveAbility in Stats.PassiveAbilities) {
-            passiveAbility.Execute();
+            passiveAbility.Execute(this);
         }
     }
 }

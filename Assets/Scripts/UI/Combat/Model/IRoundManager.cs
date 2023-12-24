@@ -7,6 +7,6 @@ using System.Threading.Tasks;
 public interface IRoundManager
 {
     public int Round { get; set; }
-
+    public event EventHandler<int> OnRoundChanged;
     public void NextRound();
 }

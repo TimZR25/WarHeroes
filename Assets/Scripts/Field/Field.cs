@@ -95,12 +95,14 @@ public class Field : IField
     public List<ICell> GetNeighborsRadius(ICell cell, int radius)
     {
         if (cell == null) throw new ArgumentNullException("Пустая ссылка на клетку");
-        if (radius < 1) throw new ArgumentOutOfRangeException("Радиус не может быть меньше 1");
+        if (radius < 0) throw new ArgumentOutOfRangeException("Радиус не может быть меньше 0");
 
         HashSet<ICell> result = new HashSet<ICell>(cell.Neighbors)
         {
             cell
         };
+
+        if (radius == 1) new List<ICell>(result);
 
         int count = 1;
 

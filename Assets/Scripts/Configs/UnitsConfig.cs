@@ -62,7 +62,7 @@ public class UnitConfig : IUnitStats
     public decimal Power { get => (decimal)_power; set { } }
 
     [field: SerializeField] public int MaxArmor { get; set; }
-    public int Armor { get; set; }
+    [field: SerializeField] public int Armor { get; set; }
 
     [field: SerializeField] public int DistanceOfMove { get; set; }
     [field: SerializeField] public int Initiative { get; set; }

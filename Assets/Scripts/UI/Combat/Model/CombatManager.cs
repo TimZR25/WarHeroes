@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 
 public class CombatManager : ICombatManager
 {
@@ -17,7 +18,9 @@ public class CombatManager : ICombatManager
         get { return _currentUnit; }
         set
         {
+            _currentUnit?.CellParent.Deselect();
             _currentUnit = value;
+            _currentUnit?.CellParent.Select();
             OnCurrentUnitChanged?.Invoke(this, EventArgs.Empty);
         }
     }
@@ -25,6 +28,23 @@ public class CombatManager : ICombatManager
     public List<IUnit> UnitsCanTakeAction { get; set; } = new List<IUnit>();
     public PriorityQueue<IUnit, int> UnitsPriorityQueue { get; set; } = new PriorityQueue<IUnit, int>();
     
+    public List<IUnit> AllUnits
+    {
+        get
+        {
+            List<IUnit> result = new List<IUnit>();
+
+            foreach (IPlayer player in Players)
+            {
+                foreach (IUnit unit in player.ControlledUnits)
+                {
+                    result.Add(unit);
+                }
+            }
+
+            return result;
+        }
+    }
 
     public event EventHandler<IPlayer> OnPlayerLose;
     public event EventHandler OnCurrentUnitChanged;
@@ -51,8 +71,9 @@ public class CombatManager : ICombatManager
         Players = players;
         RoundManager = roundManager;
         SubscribeUnitEvent();
+        OnCurrentUnitChanged += ChangeCurrentPlayer;
     }
-    public void ChangeCurrentPlayer()
+    public void ChangeCurrentPlayer(object sender, EventArgs eventArgs)
     {
         foreach (IPlayer player in _players)
         {
@@ -61,7 +82,7 @@ public class CombatManager : ICombatManager
     }
     public void ChangeUnitsCanTakeAction()
     {
-        foreach (IUnit unit in GetAllUnits())
+        foreach (IUnit unit in AllUnits)
         {
             UnitsCanTakeAction.Add(unit);
         }
@@ -78,7 +99,7 @@ public class CombatManager : ICombatManager
     }
 
     public void SubscribeUnitEvent() {
-        foreach (IUnit unit in GetAllUnits()) {
+        foreach (IUnit unit in AllUnits) {
             unit.OnTurnCompleted += NextTurn;
             unit.OnDead += RemoveDeadUnitFromField;
         }
@@ -89,22 +110,17 @@ public class CombatManager : ICombatManager
     {
         if (UnitsPriorityQueue.Count == 0)
         {
-            if (RoundManager.Round != 0) 
-            {
-                ApplyAllPassiveAbilities(); 
-            }
-
             RoundManager.NextRound();
 
             ChangeUnitsCanTakeAction();
 
             RebuildQueue();
-        }
 
+            ApplyAllPassiveAbilities();
+        }
 
         UnitsCanTakeAction.Remove(CurrentUnit);
         CurrentUnit = UnitsPriorityQueue.Dequeue();
-        ChangeCurrentPlayer();
     }
 
     public void StartGame()
@@ -116,7 +132,6 @@ public class CombatManager : ICombatManager
         RebuildQueue();
 
         CurrentUnit = UnitsPriorityQueue.Dequeue();
-        ChangeCurrentPlayer();
     }
 
     public void RemoveDeadUnitFromField(object sender, IUnit unit) {
@@ -147,24 +162,9 @@ public class CombatManager : ICombatManager
     }
 
     private void ApplyAllPassiveAbilities() {
-        foreach (IUnit unit in GetAllUnits()) {
+        foreach (IUnit unit in AllUnits) {
             unit.ApplyPassiveAbilities();
         }
-    }
-
-    public List<IUnit> GetAllUnits()
-    {
-        List<IUnit> result = new List<IUnit>();
-
-        foreach (IPlayer player in Players)
-        {
-            foreach (IUnit unit in player.ControlledUnits)
-            {
-                result.Add(unit);
-            }
-        }
-
-        return result;
     }
 }
 

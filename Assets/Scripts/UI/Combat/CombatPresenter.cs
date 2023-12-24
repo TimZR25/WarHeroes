@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using static UnityEditor.Experimental.GraphView.GraphView;
+using static UnityEngine.UI.CanvasScaler;
 
 namespace Assets.Scripts.UI.Combat
 {
@@ -23,6 +26,8 @@ namespace Assets.Scripts.UI.Combat
 
         private UnitStateAction _unitAction;
 
+        private int _abilityIndex;
+
         public CombatPresenter(ICombatView view, GameConfig gameConfig, List<IPlayer> players)
         {
             _view = view;   
@@ -33,11 +38,19 @@ namespace Assets.Scripts.UI.Combat
 
             CombatManager.OnCurrentUnitChanged += CurrentUnitChanged;
 
-            _view.SkipButton.onClick.AddListener(UnitSkipTurn);
-            _view.MoveButton.onClick.AddListener(UnitMove);
             _view.AbilityButton.onClick.AddListener(UnitUseAbility);
+            _view.MoveButton.onClick.AddListener(UnitMove);
+            _view.SkipButton.onClick.AddListener(UnitSkipTurn);
+            _view.QuitButton.onClick.AddListener(QuitGame);
+
+            _view.AbilityBoardView.OnAbilityChanged += ChangeAbilityIndex;
+
+            CombatManager.RoundManager.OnRoundChanged += RoundChanged;
+            CombatManager.OnPlayerLose += PlayerLose;
 
             SubscribeCells();
+
+            ClearInfoBoard();
 
             StartFirstRound();
         }
@@ -51,8 +64,8 @@ namespace Assets.Scripts.UI.Combat
                     _view.CellsViews[x, y].OnClicked += CellClicked;
                     _view.CellsViews[x, y].OnMouseEntered += CellMouseEntered;
                     CombatManager.GameField.Cells[x, y].OnModelChanged += _view.CellsViews[x, y].ChangeModel;
-                    CombatManager.GameField.Cells[x, y].OnSelected += _view.CellsViews[x, y].Select;
                     CombatManager.GameField.Cells[x, y].OnDeselected += _view.CellsViews[x, y].Deselect;
+                    CombatManager.GameField.Cells[x, y].OnSelected += _view.CellsViews[x, y].Select;
                 }
             }
         }
@@ -71,6 +84,11 @@ namespace Assets.Scripts.UI.Combat
             CombatManager.StartGame();
         }
 
+        public void RoundChanged(object sender, int round)
+        {
+            _view.RoundTitle.text = "Round: " + round.ToString();
+        }
+
         public void CellClicked(int x, int y)
         {
             _selectedCell = CombatManager.GameField.Cells[x, y];
@@ -80,14 +98,18 @@ namespace Assets.Scripts.UI.Combat
                 case UnitStateAction.None:
                     break;
                 case UnitStateAction.Ability:
-                    CombatManager.CurrentUnit.UseActiveAbility(CombatManager.CurrentUnit.Stats.ActiveAbilities[0], _selectedCell);
-                    DeselectCells(_selectedCells);
-                    _unitAction = UnitStateAction.None;
+                    if (CombatManager.CurrentUnit.TryUseActiveAbility(CombatManager.CurrentUnit.Stats.ActiveAbilities[_abilityIndex], _selectedCell))
+                    {
+                        DeselectCells(_selectedCells);
+                        CombatManager.CurrentUnit.CellParent.Select();
+                        _unitAction = UnitStateAction.None;
+                    }
                     break;
                 case UnitStateAction.Move:
                     if (CombatManager.CurrentUnit.TryMove(_selectedCell, CombatManager.GameField))
                     {
                         DeselectCells(_selectedCells);
+                        CombatManager.CurrentUnit.CellParent.Select();
                         _view.MoveButton.interactable = false;
                         _view.MoveButton.GetComponent<Image>().color = Color.gray;
                         _unitAction = UnitStateAction.None;
@@ -100,7 +122,38 @@ namespace Assets.Scripts.UI.Combat
 
         public void CellMouseEntered(int x, int y)
         {
-            
+            IUnit unit = CombatManager.GameField.Cells[x, y].Unit;
+            if (unit == null)
+            {
+                ClearInfoBoard();
+                return;
+            }
+
+            UpdateInfoBoard(unit.Stats);
+        }
+
+        private void ClearInfoBoard()
+        {
+            _view.InfoBoardView.UnitNameText.text = "None";
+            _view.InfoBoardView.HealthUI.text = "0/0";
+            _view.InfoBoardView.ArmorUI.text = "0/0";
+            _view.InfoBoardView.PowerUI.text = "0";
+            _view.InfoBoardView.EnergyUI.text = "0/0";
+            _view.InfoBoardView.DistanceMoveUI.text = "0";
+            _view.InfoBoardView.InitiativeUI.text = "0";
+            _view.InfoBoardView.DescriptionUI.text = "";
+        }
+
+        private void UpdateInfoBoard(IUnitStats stats)
+        {
+            _view.InfoBoardView.UnitNameText.text = stats.Name;
+            _view.InfoBoardView.HealthUI.text = $"{stats.CurrentHealth}/{stats.MaxHealth}";
+            _view.InfoBoardView.ArmorUI.text = $"{stats.Armor}/{stats.MaxArmor}";
+            _view.InfoBoardView.PowerUI.text = stats.MaxArmor.ToString();
+            _view.InfoBoardView.EnergyUI.text = $"{stats.CurrentEnergy}/{stats.MaxEnergy}";
+            _view.InfoBoardView.DistanceMoveUI.text = stats.DistanceOfMove.ToString();
+            _view.InfoBoardView.InitiativeUI.text = stats.Initiative.ToString();
+            _view.InfoBoardView.DescriptionUI.text = stats.Description.ToString();
         }
 
         private void CurrentUnitChanged(object sender, EventArgs eventArgs)
@@ -109,12 +162,20 @@ namespace Assets.Scripts.UI.Combat
 
             _view.MoveButton.interactable = true;
             _view.MoveButton.GetComponent<Image>().color = Color.white;
+
+            _view.PlayerTitle.text = "Turn: " + CombatManager.CurrentPlayer.Name;
+        }
+
+        public void PlayerLose(object sender, IPlayer player)
+        {
+            _view.EndGameView.Show();
+            _view.EndGameView.Init(player.Name);
+            _view.Hide();
         }
 
         public void UnitSkipTurn()
         {
             _unitAction = UnitStateAction.None;
-
             CombatManager.CurrentUnit.SkipTurn();
         }
 
@@ -122,17 +183,21 @@ namespace Assets.Scripts.UI.Combat
         {
             DeselectCells(_selectedCells);
 
+            CombatManager.CurrentUnit.CellParent.Deselect();
+
             _unitAction = UnitStateAction.Ability;
 
             _selectedCells = CombatManager.GameField.GetNeighborsRadius(CombatManager.CurrentUnit.CellParent,
-                CombatManager.CurrentUnit.Stats.ActiveAbilities[0].Range);
+                CombatManager.CurrentUnit.Stats.ActiveAbilities[_abilityIndex].Range);
 
             SelectCells(_selectedCells);
         }
 
         public void UnitMove()
         {
+            CombatManager.CurrentUnit.CellParent.Deselect();
             DeselectCells(_selectedCells);
+
 
             _unitAction = UnitStateAction.Move;
 
@@ -150,6 +215,26 @@ namespace Assets.Scripts.UI.Combat
         private void DeselectCells(List<ICell> cells)
         {
             foreach (ICell cell in cells) cell.Deselect();
+        }
+
+        private void ChangeAbilityIndex(object sender, int index)
+        {
+            _abilityIndex = index;
+
+            if (_unitAction == UnitStateAction.Ability)
+            {
+                DeselectCells(_selectedCells);
+
+                _selectedCells = CombatManager.GameField.GetNeighborsRadius(CombatManager.CurrentUnit.CellParent,
+                    CombatManager.CurrentUnit.Stats.ActiveAbilities[_abilityIndex].Range);
+
+                SelectCells(_selectedCells);
+            }
+        }
+
+        private void QuitGame()
+        {
+            Application.Quit();
         }
     }
 

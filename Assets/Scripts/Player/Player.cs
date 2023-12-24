@@ -23,26 +23,5 @@ public class Player : IPlayer
     {
         Name = name;
         ControlledUnits = units;
-
-        foreach (IUnit unit in units)
-        {
-            unit.OnDead += RemoveUnit;
-        }
-    }
-
-    public void AddUnit(IUnit unit)
-    {
-        if (unit == null) throw new NullReferenceException("Игрок получил пустую ссылку на юнита");
-
-        unit.OnDead += RemoveUnit;
-
-        ControlledUnits.Add(unit);
-    }
-
-    public void RemoveUnit(object sender, IUnit unit)
-    {
-        unit.OnDead -= RemoveUnit;
-
-        ControlledUnits.Remove(unit);
     }
 }

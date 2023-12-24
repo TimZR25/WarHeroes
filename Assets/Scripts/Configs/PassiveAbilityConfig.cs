@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Assets.Scripts.Abilities.ActiveAbilities;
+using Assets.Scripts.Abilities.PassiveAbilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,19 +9,14 @@ using UnityEngine;
 
 namespace Assets.Scripts.Configs
 {
-    [CreateAssetMenu(fileName = "PassiveAbilityConfig", menuName = "ScriptableObjects/Configs/PassiveAbilityConfig")]
     [Serializable]
-    public class PassiveAbilityConfig : ScriptableObject, IPassiveAbility
+    public abstract class PassiveAbilityConfig : ScriptableObject, IPassiveAbility
     {
-        [field: SerializeField] public decimal Coefficient { get; set; }
-        [field: SerializeField] public string Description { get; set; }
-        [field: SerializeField] public bool IsHeal { get; set; }
-        
-        public IUnit Unit { get; set; }
+        [SerializeField] private double _coefficient;
+        public decimal Coefficient { get => (decimal)_coefficient; set { } }
 
-        public void Execute()
-        {
-            throw new NotImplementedException();
-        }
+        [field: SerializeField] public string Description { get; set; }
+
+        public abstract void Execute(IUnit unit);
     }
 }

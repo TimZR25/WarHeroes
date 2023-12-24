@@ -2,16 +2,27 @@ using Assets.Scripts.UI.Combat;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class CombatView : MonoBehaviour, ICombatView
 {
     [SerializeField] private GameConfig _gameConfig;
 
+    [Header("Views")]
+    [SerializeField] private InfoBoardView _infoBoardView;
+    public InfoBoardView InfoBoardView => _infoBoardView;
+
+    [SerializeField] private AbilityBoardView _abilityBoardView;
+    public AbilityBoardView AbilityBoardView => _abilityBoardView;
+
+    [SerializeField] private EndGameView _endGameView;
+    public EndGameView EndGameView => _endGameView;
+
     [SerializeField] private CellView _cellView;
 
+    [Header("ActionButtons")]
     [SerializeField] private Button _abilityButton;
     public Button AbilityButton => _abilityButton;
 
@@ -21,8 +32,15 @@ public class CombatView : MonoBehaviour, ICombatView
     [SerializeField] private Button _skipButton;
     public Button SkipButton => _skipButton;
 
-    [SerializeField] private Button _pauseButton;
-    public Button PauseButton => _pauseButton;
+    [SerializeField] private Button _quitButton;
+    public Button QuitButton => _quitButton;
+
+    [Header("Info")]
+    [SerializeField] private TextMeshProUGUI _roundTitle;
+    public TextMeshProUGUI RoundTitle => _roundTitle;
+
+    [SerializeField] private TextMeshProUGUI _playerTitle;
+    public TextMeshProUGUI PlayerTitle => _playerTitle;
 
     private CellView[,] _cellViews;
     public CellView[,] CellsViews => _cellViews;

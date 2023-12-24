@@ -9,7 +9,7 @@ public interface IUnit
     public event EventHandler<IUnit> OnTurnCompleted;
     public event EventHandler<IUnit> OnDead;
 
-    public void UseActiveAbility(IActiveAbility ability, ICell cell);
+    public bool TryUseActiveAbility(IActiveAbility ability, ICell cell);
     public bool TryMove(ICell cell, IField field);
     public void SkipTurn();
 

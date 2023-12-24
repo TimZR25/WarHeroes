@@ -9,6 +9,5 @@ public interface IAbility
 {
     public decimal Coefficient { get; set; }
     public string Description { get; set; }
-    public bool IsHeal { get; set; }
 }
 
