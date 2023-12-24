@@ -159,6 +159,7 @@ namespace Assets.Scripts.UI.Combat
         private void CurrentUnitChanged(object sender, EventArgs eventArgs)
         {
             DeselectCells(_selectedCells);
+            _selectedCells.Clear();
 
             _view.MoveButton.interactable = true;
             _view.MoveButton.GetComponent<Image>().color = Color.white;

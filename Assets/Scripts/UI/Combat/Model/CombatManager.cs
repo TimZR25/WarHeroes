@@ -82,6 +82,8 @@ public class CombatManager : ICombatManager
     }
     public void ChangeUnitsCanTakeAction()
     {
+        UnitsCanTakeAction.Clear();
+
         foreach (IUnit unit in AllUnits)
         {
             UnitsCanTakeAction.Add(unit);
@@ -131,6 +133,9 @@ public class CombatManager : ICombatManager
 
         RebuildQueue();
 
+        ApplyAllPassiveAbilities();
+
+        UnitsCanTakeAction.Remove(CurrentUnit);
         CurrentUnit = UnitsPriorityQueue.Dequeue();
     }
 
