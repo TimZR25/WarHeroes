@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7243ef9633cfcc7438479f15b311c2f7, type: 3}
   m_Name: Archery
   m_EditorClassIdentifier: 
-  _coefficient: 0
-  <Description>k__BackingField: 
-  <Cost>k__BackingField: 0
-  <Range>k__BackingField: 0
+  _coefficient: 0.7
+  <Description>k__BackingField: "\u041E\u0431\u044B\u0447\u043D\u044B\u0439 \u0432\u044B\u0441\u0442\u0440\u0435\u043B"
+  <Cost>k__BackingField: 3
+  <Range>k__BackingField: 4
   <IsHeal>k__BackingField: 0

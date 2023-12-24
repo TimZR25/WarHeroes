@@ -8,7 +8,7 @@ public class UpArmorConfig : PassiveAbilityConfig
 {
     public override void Execute(IUnit unit)
     {
-        if (unit.Stats.Armor + Coefficient >= unit.Stats.MaxArmor) { unit.Stats.Armor = unit.Stats.MaxArmor; }
-        else { unit.Stats.Armor = unit.Stats.Armor + (int)Coefficient; }
+        if (unit.Stats.Armor + (int)Coefficient >= unit.Stats.MaxArmor) { unit.Stats.Armor = unit.Stats.MaxArmor; }
+        else { unit.Stats.Armor += (int)Coefficient; }
     }
 }

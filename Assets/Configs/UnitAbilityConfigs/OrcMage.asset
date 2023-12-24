@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c449c4e254582ab43967a86490801137, type: 3}
   m_Name: OrcMage
   m_EditorClassIdentifier: 
-  _id: 0
-  _name: 
-  _activeAbilities: []
-  _passiveAbilities: []
+  _activeAbilities:
+  - {fileID: 11400000, guid: 15cd76688e34cae4e966a10ec8990417, type: 2}
+  - {fileID: 11400000, guid: f8898c8f0edb47c4085eb6c15e4747e3, type: 2}
+  _passiveAbilities:
+  - {fileID: 11400000, guid: 731b9cc4625142943af574e7d128cecb, type: 2}
