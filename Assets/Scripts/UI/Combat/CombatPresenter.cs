@@ -147,13 +147,13 @@ namespace Assets.Scripts.UI.Combat
         private void UpdateInfoBoard(IUnitStats stats)
         {
             _view.InfoBoardView.UnitNameText.text = stats.Name;
-            _view.InfoBoardView.HealthUI.text = $"{stats.CurrentHealth}/{stats.MaxHealth}";
-            _view.InfoBoardView.ArmorUI.text = $"{stats.Armor}/{stats.MaxArmor}";
-            _view.InfoBoardView.PowerUI.text = stats.MaxArmor.ToString();
-            _view.InfoBoardView.EnergyUI.text = $"{stats.CurrentEnergy}/{stats.MaxEnergy}";
-            _view.InfoBoardView.DistanceMoveUI.text = stats.DistanceOfMove.ToString();
-            _view.InfoBoardView.InitiativeUI.text = stats.Initiative.ToString();
-            _view.InfoBoardView.DescriptionUI.text = stats.Description.ToString();
+            _view.InfoBoardView.HealthUI.text = $"{stats.CurrentHealth:#.#}/{stats.MaxHealth:#.#}";
+            _view.InfoBoardView.ArmorUI.text = $"{stats.Armor:#.#}/{stats.MaxArmor:#.#}";
+            _view.InfoBoardView.PowerUI.text = $"{stats.Power:#.#}";
+            _view.InfoBoardView.EnergyUI.text = $"{stats.CurrentEnergy:#.#}/{stats.MaxEnergy:#.#}";
+            _view.InfoBoardView.DistanceMoveUI.text = $"{stats.DistanceOfMove:#.#}";
+            _view.InfoBoardView.InitiativeUI.text = $"{stats.Initiative:#.#}";
+            _view.InfoBoardView.DescriptionUI.text = $"{stats.Description:#.#}";
         }
 
         private void CurrentUnitChanged(object sender, EventArgs eventArgs)

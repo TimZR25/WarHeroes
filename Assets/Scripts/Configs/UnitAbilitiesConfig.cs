@@ -11,9 +11,6 @@ namespace Assets.Scripts.Configs
     [Serializable]
     public class UnitAbilitiesConfig : ScriptableObject
     {
-        [SerializeField] private int _id;
-        [SerializeField] private string _name;
-
         [SerializeField] private List<ActiveAbilityConfig> _activeAbilities;
         public List<IActiveAbility> ActiveAbilities => new(_activeAbilities);
 

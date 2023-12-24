@@ -8,7 +8,7 @@ public class UpEnergyConfig : PassiveAbilityConfig
 {
     public override void Execute(IUnit unit)
     {
-        if (unit.Stats.MaxEnergy >= unit.Stats.CurrentEnergy + unit.Stats.MaxEnergy * Coefficient) { unit.Stats.CurrentEnergy = unit.Stats.MaxEnergy; }
+        if (unit.Stats.CurrentEnergy + unit.Stats.MaxEnergy * Coefficient >= unit.Stats.MaxEnergy) { unit.Stats.CurrentEnergy = unit.Stats.MaxEnergy; }
         else { unit.Stats.CurrentEnergy += unit.Stats.MaxEnergy * Coefficient; }
     }
 }
