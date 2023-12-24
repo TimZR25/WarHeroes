@@ -11,9 +11,6 @@ namespace Assets.Scripts.UI
 
         [SerializeField] private Button _playButton;
 
-        [SerializeField] private TMP_InputField _sizeField;
-        public TMP_InputField SizeField => _sizeField;
-
         [SerializeField] private TextMeshProUGUI _errorText;
         public TextMeshProUGUI ErrorText => _errorText;
 
@@ -56,10 +53,20 @@ namespace Assets.Scripts.UI
             _errorText.text = text;
         }
 
-        public void ShowPreparationView(List<IDataPlayer> dataPlayers, int sizeField)
+        public void ShowPreparationView(List<IDataPlayer> dataPlayers)
         {
-            _preparationView.gameObject.SetActive(true);
-            _preparationView.Init(dataPlayers, sizeField);
+            _preparationView.Show();
+            _preparationView.Init(dataPlayers);
+            Hide();
+        }
+
+        public void Show()
+        {
+            gameObject.SetActive(true);
+        }
+
+        public void Hide()
+        {
             gameObject.SetActive(false);
         }
     }

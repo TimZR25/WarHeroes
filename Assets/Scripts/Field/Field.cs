@@ -7,22 +7,28 @@ using System.Threading.Tasks;
 
 public class Field : IField
 {
-    private ICell[,] _field;
+    private ICell[,] _cells;
+    public ICell[,] Cells => _cells;
 
-    private int _sizeSide;
+    private int _width;
+    private int _height;
 
-    public Field(int sizeSide)
+    public int Width => _width;
+    public int Height => _height;
+
+    public Field(int fieldWidth, int fieldHeight)
     {
-        _sizeSide = sizeSide;
+        _width = fieldWidth;
+        _height = fieldHeight;
 
-        _field = new ICell[_sizeSide, _sizeSide];
+        _cells = new ICell[Width, Height];
 
-        for (int x = 0; x < _sizeSide; x++)
+        for (int x = 0; x < Width; x++)
         {
-            for (int y = 0; y < _sizeSide; y++)
+            for (int y = 0; y < Height; y++)
             {
-                ICell cell = new Cell(x, y);
-                _field[x, y] = cell;
+                ICell cell = new Cell();
+                _cells[x, y] = cell;
             }
         }
 
@@ -31,7 +37,7 @@ public class Field : IField
 
     public void AddUnit(IUnit unit, int x, int y)
     {
-        if (_field[x, y].Unit == null && _field[x, y].Obstacle == null) _field[x, y].Unit = unit;
+        if (_cells[x, y].Unit == null && _cells[x, y].Obstacle == null) _cells[x, y].Unit = unit;
         else 
         {
             throw new ArgumentException("Клетка уже занята");
@@ -39,25 +45,16 @@ public class Field : IField
     }
     public void AddObstacle(IObstacle obstacle, int x, int y)
     {
-        if (_field[x, y].Unit == null && _field[x, y].Obstacle == null) _field[x, y].Obstacle = obstacle;
+        if (_cells[x, y].Unit == null && _cells[x, y].Obstacle == null) _cells[x, y].Obstacle = obstacle;
         else
         {
             throw new ArgumentException("Клетка уже занята");
         }
     }
 
-    public ICell GetCell(int x, int y)
-    {
-        if (x > _sizeSide || y > _sizeSide || x < 0 || y < 0) {
-            throw new ArgumentOutOfRangeException("Некорректные координаты для получения клетки");
-        }
-
-        return _field[x, y];
-    }
-
     public void ClearField()
     {
-        foreach (ICell cell in _field)
+        foreach (ICell cell in _cells)
         {
             cell.Unit = null;
             cell.Obstacle = null;
@@ -66,9 +63,9 @@ public class Field : IField
 
     private void AddNeighborsAll()
     {
-        for (int x = 0; x < _sizeSide; x++)
+        for (int x = 0; x < Width; x++)
         {
-            for (int y = 0; y < _sizeSide; y++)
+            for (int y = 0; y < Height; y++)
             {
                 AddNeighbors(x, y);
             }
@@ -84,13 +81,13 @@ public class Field : IField
 
     private void AddNeighbors(int x, int y)
     {
-        foreach (int dx in Shifts(x, _sizeSide))
+        foreach (int dx in Shifts(x, Width))
         {
-            foreach (int dy in Shifts(y, _sizeSide))
+            foreach (int dy in Shifts(y, Height))
             {
                 if ((dx == 0) && (dy == 0))
                     continue;
-                _field[x, y].Neighbors.Add(_field[x + dx, y + dy]);
+                _cells[x, y].Neighbors.Add(_cells[x + dx, y + dy]);
             }
         }
     }
@@ -98,10 +95,14 @@ public class Field : IField
     public List<ICell> GetNeighborsRadius(ICell cell, int radius)
     {
         if (cell == null) throw new ArgumentNullException("Пустая ссылка на клетку");
-        if (radius < 1) throw new ArgumentOutOfRangeException("Радиус не может быть меньше 1");
+        if (radius < 0) throw new ArgumentOutOfRangeException("Радиус не может быть меньше 0");
 
-        HashSet<ICell> result = new HashSet<ICell>(cell.Neighbors);
-        result.Add(cell);
+        HashSet<ICell> result = new HashSet<ICell>(cell.Neighbors)
+        {
+            cell
+        };
+
+        if (radius == 1) new List<ICell>(result);
 
         int count = 1;
 

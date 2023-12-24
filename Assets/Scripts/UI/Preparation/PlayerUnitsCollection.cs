@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Assets.Scripts.Abilities.ActiveAbilities;
+using Assets.Scripts.Models.Units;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
@@ -30,6 +32,7 @@ namespace Assets.Scripts.UI
         public PlayerUnitsCollection(UnitsConfig unitsConfig, TypeFaction typeFaction)
         {
             _unitStats = unitsConfig.GetByFaction(typeFaction);
+
             _factoryUnits = new FactoriesUnitsFactory().CreateFactory(typeFaction);
         }
 
@@ -38,15 +41,15 @@ namespace Assets.Scripts.UI
             switch (role)
             {
                 case TypeRole.WARRIOR:
-                    Warriors.Add(_factoryUnits.CreateWarrior(_unitStats[(int)role]));
+                    Warriors.Add(new Unit(new BaseUnitStats(_unitStats[(int)role])));
                     OnWarriorAmountChanged?.Invoke(this, Warriors.Count);
                     break;
                 case TypeRole.ARCHER:
-                    Archers.Add(_factoryUnits.CreateArcher(_unitStats[(int)role]));
+                    Archers.Add(new Unit(new BaseUnitStats(_unitStats[(int)role])));
                     OnArcherAmountChanged?.Invoke(this, Archers.Count);
                     break;
                 case TypeRole.MAGE:
-                    Mages.Add(_factoryUnits.CreateMage(_unitStats[(int)role]));
+                    Mages.Add(new Unit(new BaseUnitStats(_unitStats[(int)role])));
                     OnMageAmountChanged?.Invoke(this, Mages.Count);
                     break;
             }

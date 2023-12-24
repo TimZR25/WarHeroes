@@ -140,18 +140,18 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 80
-        width: 16
-        height: 16
+        y: 63
+        width: 21
+        height: 21
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 6, y: 6, z: 6, w: 6}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 584075367ab3a2e438a9457b5e69bfa4
-      internalID: 1606052396
+      spriteID: 7f83bf638f2d82d4a8022141ee300d8e
+      internalID: 7198423
       vertices: []
       indices: 
       edges: []
@@ -160,19 +160,19 @@ TextureImporter:
       name: WarHeroes_1
       rect:
         serializedVersion: 2
-        x: 17
-        y: 80
-        width: 16
-        height: 16
+        x: 21
+        y: 63
+        width: 21
+        height: 21
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0caae85ab9dfbfe44abf2359d9279c20
-      internalID: -914070686
+      spriteID: 21da4350475f42c45a90c47beb112131
+      internalID: 217811577
       vertices: []
       indices: 
       edges: []
@@ -181,19 +181,19 @@ TextureImporter:
       name: WarHeroes_2
       rect:
         serializedVersion: 2
-        x: 34
-        y: 80
-        width: 16
-        height: 16
+        x: 42
+        y: 63
+        width: 21
+        height: 21
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d91bff473ec44994c91ec5c8b7af9ae6
-      internalID: 1033940365
+      spriteID: b2cac0c3c84f76f4880b650c1e59027f
+      internalID: -1179697950
       vertices: []
       indices: 
       edges: []
@@ -202,19 +202,19 @@ TextureImporter:
       name: WarHeroes_3
       rect:
         serializedVersion: 2
-        x: 68
-        y: 80
-        width: 16
-        height: 16
+        x: 63
+        y: 63
+        width: 21
+        height: 21
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 831d1a964895c984e96c295826313052
-      internalID: 2041338088
+      spriteID: 996131788f28a9c4c964c21a5df75070
+      internalID: 1132430740
       vertices: []
       indices: 
       edges: []
@@ -223,19 +223,19 @@ TextureImporter:
       name: WarHeroes_4
       rect:
         serializedVersion: 2
-        x: 85
-        y: 80
-        width: 16
-        height: 16
+        x: 84
+        y: 63
+        width: 21
+        height: 21
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 162e2f493af26db4498bd1ba35e7d919
-      internalID: 2122407465
+      spriteID: 0b68eabf535eae8468c31b9dfbc3f7fe
+      internalID: 70326884
       vertices: []
       indices: 
       edges: []
@@ -244,19 +244,19 @@ TextureImporter:
       name: WarHeroes_5
       rect:
         serializedVersion: 2
-        x: 4
-        y: 68
-        width: 7
-        height: 7
+        x: 0
+        y: 42
+        width: 21
+        height: 21
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 39b2ed9ab3d78ab48818c34dc9610b31
-      internalID: 1674516568
+      spriteID: da500fd0abc38a54ba95a60a1b71e358
+      internalID: -1580258307
       vertices: []
       indices: 
       edges: []
@@ -265,40 +265,19 @@ TextureImporter:
       name: WarHeroes_6
       rect:
         serializedVersion: 2
-        x: 17
-        y: 65
-        width: 14
-        height: 14
+        x: 21
+        y: 42
+        width: 21
+        height: 21
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f8d9d39cb3dae314d8d0dd26e4b8f3fa
-      internalID: -2081709601
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WarHeroes_12
-      rect:
-        serializedVersion: 2
-        x: 55
-        y: 43
-        width: 15
-        height: 19
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4a008aebde3954742a49ebe2f4eaff75
-      internalID: -870274220
+      spriteID: 95830432890e43d42b151a53d34023e8
+      internalID: -84647182
       vertices: []
       indices: 
       edges: []
@@ -307,19 +286,19 @@ TextureImporter:
       name: WarHeroes_7
       rect:
         serializedVersion: 2
-        x: 32
-        y: 64
-        width: 16
-        height: 16
+        x: 42
+        y: 42
+        width: 21
+        height: 21
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cde97c17a931ed347aeba9cf966f24f9
-      internalID: 1006027384
+      spriteID: 3de896edd16ec9341a01afb4cb2ce17a
+      internalID: 1988327835
       vertices: []
       indices: 
       edges: []
@@ -328,19 +307,19 @@ TextureImporter:
       name: WarHeroes_8
       rect:
         serializedVersion: 2
-        x: 96
-        y: 63
-        width: 16
-        height: 16
+        x: 63
+        y: 42
+        width: 21
+        height: 21
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 7, y: 7, z: 7, w: 7}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b51aba027220341438510c3c79890b9a
-      internalID: 1578630448
+      spriteID: c3ed46e9e716e414b8953695aeaf3244
+      internalID: 718823719
       vertices: []
       indices: 
       edges: []
@@ -349,19 +328,19 @@ TextureImporter:
       name: WarHeroes_9
       rect:
         serializedVersion: 2
-        x: 0
-        y: 43
-        width: 16
-        height: 17
+        x: 84
+        y: 42
+        width: 21
+        height: 21
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: da0b666d1d7c86641b9d36c1f21f1ad8
-      internalID: -649368835
+      spriteID: 55ff3793550b6dc48b4aa126eb9ecc0f
+      internalID: -313257694
       vertices: []
       indices: 
       edges: []
@@ -370,19 +349,19 @@ TextureImporter:
       name: WarHeroes_10
       rect:
         serializedVersion: 2
-        x: 19
-        y: 43
-        width: 14
-        height: 15
+        x: 0
+        y: 21
+        width: 21
+        height: 21
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dc41151e68f20e84588b2182b564856b
-      internalID: 1098558934
+      spriteID: a03fbeceb53553843ab940fd4288ce6f
+      internalID: 272860362
       vertices: []
       indices: 
       edges: []
@@ -391,19 +370,40 @@ TextureImporter:
       name: WarHeroes_11
       rect:
         serializedVersion: 2
-        x: 38
-        y: 43
-        width: 14
-        height: 20
+        x: 21
+        y: 21
+        width: 21
+        height: 21
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2e3c3db0f4dedda4b80ebf2790c9da79
-      internalID: 9082954
+      spriteID: 1dcc3e482201a0a46b3672fa33ef3fe2
+      internalID: 85880818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WarHeroes_12
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 21
+        width: 21
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 916f9a7b99f43f34b90c9bd340dd654a
+      internalID: 1852322639
       vertices: []
       indices: 
       edges: []
@@ -412,19 +412,19 @@ TextureImporter:
       name: WarHeroes_13
       rect:
         serializedVersion: 2
-        x: 72
-        y: 43
-        width: 13
-        height: 15
+        x: 63
+        y: 21
+        width: 21
+        height: 21
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5454927d4126e1a48ad6c064e4b58cb8
-      internalID: -1350235093
+      spriteID: 711368e5c618a7041b3e1c0842aa027f
+      internalID: -138219258
       vertices: []
       indices: 
       edges: []
@@ -433,19 +433,19 @@ TextureImporter:
       name: WarHeroes_14
       rect:
         serializedVersion: 2
-        x: 1
+        x: 84
         y: 21
-        width: 16
-        height: 17
+        width: 21
+        height: 21
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 461b721ee876e424ebf731aad3cf9816
-      internalID: -2145758911
+      spriteID: ec69e34cb1077564085d2e367e7858e4
+      internalID: 1810811026
       vertices: []
       indices: 
       edges: []
@@ -454,19 +454,19 @@ TextureImporter:
       name: WarHeroes_15
       rect:
         serializedVersion: 2
-        x: 18
-        y: 21
-        width: 18
-        height: 20
+        x: 0
+        y: 0
+        width: 21
+        height: 21
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5b583322ecd9c1e4ebd2c08cba10561d
-      internalID: -1919383102
+      spriteID: e9d5f97d77dc7e649821cff2d48c1ce9
+      internalID: 113222505
       vertices: []
       indices: 
       edges: []
@@ -475,19 +475,19 @@ TextureImporter:
       name: WarHeroes_16
       rect:
         serializedVersion: 2
-        x: 38
-        y: 21
-        width: 15
-        height: 16
+        x: 21
+        y: 0
+        width: 21
+        height: 21
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e3caf208114fca148acc7b5785615d03
-      internalID: -1738314913
+      spriteID: c7c8294c4f5630944bdff1df257ff0c7
+      internalID: -1922033746
       vertices: []
       indices: 
       edges: []
@@ -496,19 +496,19 @@ TextureImporter:
       name: WarHeroes_17
       rect:
         serializedVersion: 2
-        x: 57
-        y: 21
-        width: 12
-        height: 16
+        x: 42
+        y: 0
+        width: 21
+        height: 21
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9c9d4bdaf60db7c42abec42000448087
-      internalID: -1389611536
+      spriteID: d7d1b6dbdae13d041998ab58d8c09e10
+      internalID: -1881282564
       vertices: []
       indices: 
       edges: []
@@ -517,19 +517,19 @@ TextureImporter:
       name: WarHeroes_18
       rect:
         serializedVersion: 2
-        x: 74
-        y: 21
-        width: 13
-        height: 15
+        x: 63
+        y: 0
+        width: 21
+        height: 21
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a4b54ab9f635c5b46ae9291683d3a3f5
-      internalID: -179980389
+      spriteID: 5512102bbf2a8c448b916bdbaae93b0a
+      internalID: 2003560056
       vertices: []
       indices: 
       edges: []
@@ -538,115 +538,10 @@ TextureImporter:
       name: WarHeroes_19
       rect:
         serializedVersion: 2
-        x: 2
+        x: 84
         y: 0
-        width: 11
-        height: 15
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c2429b195580eef4c8d4e32f1cea5eae
-      internalID: 1916638148
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WarHeroes_20
-      rect:
-        serializedVersion: 2
-        x: 17
-        y: 0
-        width: 13
-        height: 19
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4b57464dc29fd904980f8f7f3b0f0e56
-      internalID: -939871906
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WarHeroes_21
-      rect:
-        serializedVersion: 2
-        x: 33
-        y: 0
-        width: 13
-        height: 19
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2a563063b4136c34d992d9e5db178703
-      internalID: 1354523805
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WarHeroes_22
-      rect:
-        serializedVersion: 2
-        x: 50
-        y: 0
-        width: 12
-        height: 18
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e931ac650edbe914faf25243ffb7bcff
-      internalID: -1341608846
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WarHeroes_23
-      rect:
-        serializedVersion: 2
-        x: 65
-        y: 0
-        width: 16
-        height: 17
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a07bd0aae852e6849b7fee320bbe6904
-      internalID: 1175382225
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WarHeroes_24
-      rect:
-        serializedVersion: 2
-        x: 51
-        y: 80
-        width: 16
-        height: 16
+        width: 21
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -654,8 +549,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d8357b2129f988b4fbc20f444ac8ceae
-      internalID: -671265180
+      spriteID: 4bb4dacc38f231b4da9ec65703116f46
+      internalID: 1479924334
       vertices: []
       indices: 
       edges: []
@@ -671,31 +566,26 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      WarHeroes_0: 1606052396
-      WarHeroes_1: -914070686
-      WarHeroes_10: 1098558934
-      WarHeroes_11: 9082954
-      WarHeroes_12: -870274220
-      WarHeroes_13: -1350235093
-      WarHeroes_14: -2145758911
-      WarHeroes_15: -1919383102
-      WarHeroes_16: -1738314913
-      WarHeroes_17: -1389611536
-      WarHeroes_18: -179980389
-      WarHeroes_19: 1916638148
-      WarHeroes_2: 1033940365
-      WarHeroes_20: -939871906
-      WarHeroes_21: 1354523805
-      WarHeroes_22: -1341608846
-      WarHeroes_23: 1175382225
-      WarHeroes_24: -671265180
-      WarHeroes_3: 2041338088
-      WarHeroes_4: 2122407465
-      WarHeroes_5: 1674516568
-      WarHeroes_6: -2081709601
-      WarHeroes_7: 1006027384
-      WarHeroes_8: 1578630448
-      WarHeroes_9: -649368835
+      WarHeroes_0: 7198423
+      WarHeroes_1: 217811577
+      WarHeroes_10: 272860362
+      WarHeroes_11: 85880818
+      WarHeroes_12: 1852322639
+      WarHeroes_13: -138219258
+      WarHeroes_14: 1810811026
+      WarHeroes_15: 113222505
+      WarHeroes_16: -1922033746
+      WarHeroes_17: -1881282564
+      WarHeroes_18: 2003560056
+      WarHeroes_19: 1479924334
+      WarHeroes_2: -1179697950
+      WarHeroes_3: 1132430740
+      WarHeroes_4: 70326884
+      WarHeroes_5: -1580258307
+      WarHeroes_6: -84647182
+      WarHeroes_7: 1988327835
+      WarHeroes_8: 718823719
+      WarHeroes_9: -313257694
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using Assets.Scripts.Models.Units;
 
 public class Unit : AbstractUnit
 {
-    public Unit(IUnitStats unitStats) : base(unitStats)
-    {
+    public Unit(IUnitStats unitStats) {
+        Stats = new BaseUnitStats(unitStats);
     }
 }

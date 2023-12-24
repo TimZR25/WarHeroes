@@ -2,6 +2,8 @@
 
 public interface IUnitStats
 {
+    public int ID { get; set; }
+
     public string Name { get; set; }
 
     public decimal MaxHealth {  get; set; }
@@ -13,6 +15,8 @@ public interface IUnitStats
     public decimal CurrentEnergy { get; set; }
 
     public decimal Power { get; set; }
+
+    public int MaxArmor { get; set; }
 
     public int Armor { get; set; }
 

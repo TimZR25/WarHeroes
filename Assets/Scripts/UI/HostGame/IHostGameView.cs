@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.UI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,10 +10,8 @@ using UnityEngine.UI;
 
 namespace Assets.Scripts
 {
-    public interface IHostGameView
+    public interface IHostGameView : IView
     {
-        public TMP_InputField SizeField { get; }
-
         public TextMeshProUGUI ErrorText { get; }
 
         public List<TMP_InputField> PlayersNamesField { get; }

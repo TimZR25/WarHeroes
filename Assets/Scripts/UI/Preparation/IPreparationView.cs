@@ -2,7 +2,7 @@
 
 namespace Assets.Scripts.UI
 {
-    public interface IPreparationView
+    public interface IPreparationView : IView
     {
         public List<UnitsPreparationView> UnitsPreparationViews { get; }
     }

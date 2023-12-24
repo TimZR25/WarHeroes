@@ -9,21 +9,50 @@ using System.Threading.Tasks;
 
 public class Cell : ICell
 {
+    private IObstacle _obstacle;
     private IUnit _unit;
-    public IObstacle Obstacle { get; set; }
-    public List<ICell> Neighbors { get; set; }       
+
+    public event EventHandler<int> OnModelChanged;
+    public event EventHandler OnSelected;
+    public event EventHandler OnDeselected;
+
+    public IObstacle Obstacle
+    {
+        get { return _obstacle; }
+        set
+        {
+            _obstacle = value;
+            OnModelChanged(this, _obstacle.ID);
+        }
+    }
+
+    public List<ICell> Neighbors { get; set; } = new List<ICell>();  
     public IUnit Unit
     {
         get { return _unit; }
         set
         {
             _unit = value;
+            
+
+            if (_unit == null)
+            {
+                OnModelChanged?.Invoke(this, 999);
+                return;
+            }
+
             _unit.CellParent = this;
+            OnModelChanged?.Invoke(this, _unit.Stats.ID);
         }
     }
 
-    public Cell(int x, int y)
+    public void Select()
     {
-        Neighbors = new List<ICell>();
+        OnSelected?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void Deselect()
+    {
+        OnDeselected?.Invoke(this, EventArgs.Empty);
     }
 }

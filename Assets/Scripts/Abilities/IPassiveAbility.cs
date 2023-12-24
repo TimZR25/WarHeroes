@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 public interface IPassiveAbility : IAbility
 {
-    public void Execute();
-
-    public IUnit Unit { get; set; }
+    public void Execute(IUnit unit);
 }
+

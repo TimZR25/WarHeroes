@@ -7,7 +7,11 @@ namespace Assets.Scripts.UI
 {
     public class PreparationView : MonoBehaviour, IPreparationView
     {
+        [SerializeField] private CombatView _combatView;
+
+        [SerializeField] private SpritesConfig _spritesConfig;
         [SerializeField] private UnitsConfig _unitsConfig;
+        [SerializeField] private GameConfig _gameConfig;
 
         [SerializeField] private List<UnitsPreparationView> _unitsPreparationViews;
         public List<UnitsPreparationView> UnitsPreparationViews => _unitsPreparationViews;
@@ -111,41 +115,35 @@ namespace Assets.Scripts.UI
             }
         }
 
-        public void Init(List<IDataPlayer> dataPlayers, int sizeField)
+        public void Init(List<IDataPlayer> dataPlayers)
         {
-            InitUnits(dataPlayers, sizeField);
+            InitUnits(dataPlayers);
 
-            _presenter.Init(dataPlayers, sizeField, _unitsConfig);
+            _presenter.Init(dataPlayers, _gameConfig, _unitsConfig);
         }
 
-        private void InitUnits(List<IDataPlayer> dataPlayers, int sizeField)
+        private void InitUnits(List<IDataPlayer> dataPlayers)
         {
             for (int i = 0; i < dataPlayers.Count; i++)
             {
                 _unitsPreparationViews[i].PlayerName.text = dataPlayers[i].Name;
-                _unitsPreparationViews[i].UnitAmount.text = "Можно взять: " + sizeField.ToString();
+                _unitsPreparationViews[i].UnitAmount.text = "Можно взять: " + _gameConfig.FieldHeight.ToString();
 
                 for (int j = 0; j < _unitsPreparationViews[i].UnitPreparationViews.Count; j++)
                 {
                     IUnitPreparationView unitPreparationView = _unitsPreparationViews[i].UnitPreparationViews[j];
-                    UnitConfig[] unitConfigs = _unitsConfig.GetByFaction(dataPlayers[i].Faction);
 
                     unitPreparationView.UnitAmount.text = "x0";
-                    unitPreparationView.Image.sprite = unitConfigs[j].Sprite;
-                    unitPreparationView.Image.SetNativeSize();
+                    unitPreparationView.Image.sprite = _spritesConfig.Configs[(int)dataPlayers[i].Faction * 3 + j].Sprite;
                 }
             }
         }
 
         public void PlayButtonClicked()
         {
-            foreach (PlayerUnitsCollection playerCollection in _presenter.PlayersUnits)
-            {
-                foreach (IUnit unit in playerCollection.AllUnits)
-                {
-                    Debug.Log(unit.Stats.Name);
-                }
-            }
+            _combatView.Show();
+            _combatView.Init(_presenter.Players);
+            Hide();
         }
 
         public void PlusButtonClicked(object sender, IUnitPreparationView unitPreparationView)
@@ -166,6 +164,16 @@ namespace Assets.Scripts.UI
         public void Player2_UnitAmountChanged(object sender, int amount)
         {
             _unitsPreparationViews[1].UnitAmount.text = "Можно взять: " + amount.ToString();
+        }
+
+        public void Show()
+        {
+            gameObject.SetActive(true);
+        }
+
+        public void Hide()
+        {
+            gameObject.SetActive(false);
         }
     }
 }

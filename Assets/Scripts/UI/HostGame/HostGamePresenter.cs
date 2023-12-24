@@ -10,7 +10,7 @@ namespace Assets.Scripts.UI
         private string _errorText;
 
         public event EventHandler<string> OnErrorTextChanged;
-        public Action<List<IDataPlayer>, int> OnDataApproved;
+        public Action<List<IDataPlayer>> OnDataApproved;
 
         public HostGamePresenter(IHostGameView hostGameUIView)
         {
@@ -31,9 +31,7 @@ namespace Assets.Scripts.UI
                    (TypeFaction)_view.PlayersFactionDropdown[i].value));
             }
 
-            int fieldSize = int.Parse(_view.SizeField.text);
-
-            OnDataApproved?.Invoke(dataPlayers, fieldSize);
+            OnDataApproved?.Invoke(dataPlayers);
         }
 
         private bool IsCorrectData()
@@ -50,20 +48,6 @@ namespace Assets.Scripts.UI
                     OnErrorTextChanged?.Invoke(this, _errorText);
                     return false;
                 }
-            }
-
-            if (string.IsNullOrEmpty(_view.SizeField.text) || int.Parse(_view.SizeField.text) == 0)
-            {
-                _errorText = $"Размер поля не задан";
-                OnErrorTextChanged?.Invoke(this, _errorText);
-                return false;
-            }
-
-            if (_view.SizeField.text[0] == '-')
-            {
-                _errorText = $"Отрицательный размер поля";
-                OnErrorTextChanged?.Invoke(this, _errorText);
-                return false;
             }
 
             _errorText = string.Empty;
