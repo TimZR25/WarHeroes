@@ -8,8 +8,8 @@ namespace Assets.Scripts.Abilities.ActiveAbilities
 {
     public class BaseActiveAbility : AbstractActiveAbility
     {
-        public BaseActiveAbility(int cost, string description, decimal coefficient, bool isHeal, int range) 
-            : base(cost, description, coefficient, isHeal, range)
+        public BaseActiveAbility(string name, int cost, string description, decimal coefficient, bool isHeal, int range) 
+            : base(name, cost, description, coefficient, isHeal, range)
         {
 
         }

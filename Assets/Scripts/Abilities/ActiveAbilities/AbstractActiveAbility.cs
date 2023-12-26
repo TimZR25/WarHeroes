@@ -13,6 +13,7 @@ namespace Assets.Scripts.Abilities.ActiveAbilities
         private string _description;
         private int _range;
         private decimal _coefficient;
+        private string _name;
 
         public decimal Coefficient
         {
@@ -40,9 +41,16 @@ namespace Assets.Scripts.Abilities.ActiveAbilities
             set { if (value < 0) throw new ArgumentOutOfRangeException("Range не может быть отрицательным"); _range = value; }
         }
 
-
-        public AbstractActiveAbility(int cost, string description, decimal coefficient, bool isHeal, int range)
+        public string Name
         {
+            get { return _name; }
+            set { if (string.IsNullOrEmpty(value)) throw new ArgumentException("Name не может быть null или empty"); _name = value; }
+        }
+
+
+        public AbstractActiveAbility(string name, int cost, string description, decimal coefficient, bool isHeal, int range)
+        {
+            Name = name;
             Range = range;
             Description = description;
             Cost = cost;

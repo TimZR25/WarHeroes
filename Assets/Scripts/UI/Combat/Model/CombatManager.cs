@@ -55,16 +55,19 @@ public class CombatManager : ICombatManager
         get { return _gameField; }
         set { _gameField = value; }
     }
+
     public List<IPlayer> Players
     {
         get { return _players; }
         set { _players = value; }
     }
+
     public IRoundManager RoundManager 
     {
         get { return _roundManager; }
         set { _roundManager = value; } 
     }
+
     public CombatManager(IField gameField, List<IPlayer> players, IRoundManager roundManager)
     {
         GameField = gameField;
@@ -73,6 +76,7 @@ public class CombatManager : ICombatManager
         SubscribeUnitEvent();
         OnCurrentUnitChanged += ChangeCurrentPlayer;
     }
+
     public void ChangeCurrentPlayer(object sender, EventArgs eventArgs)
     {
         foreach (IPlayer player in _players)
@@ -80,8 +84,9 @@ public class CombatManager : ICombatManager
             if (player.ControlledUnits.Contains(CurrentUnit)) CurrentPlayer = player;
         }
     }
+
     public void ChangeUnitsCanTakeAction()
-    {
+    {  
         UnitsCanTakeAction.Clear();
 
         foreach (IUnit unit in AllUnits)
@@ -108,8 +113,17 @@ public class CombatManager : ICombatManager
     }
 
 
-    public void NextTurn(object sender, IUnit args) // запускает сразу(0 раунда)
+    public void NextTurn(object sender, IUnit args)
     {
+        foreach (IPlayer player in _players)
+        {
+            if (player.ControlledUnits.Count == 0)
+            {
+                OnPlayerLose.Invoke(this, player);
+                return;
+            }
+        }
+
         if (UnitsPriorityQueue.Count == 0)
         {
             RoundManager.NextRound();
@@ -127,6 +141,15 @@ public class CombatManager : ICombatManager
 
     public void StartGame()
     {
+        foreach (IPlayer player in _players)
+        {
+            if (player.ControlledUnits.Count == 0)
+            {
+                OnPlayerLose.Invoke(this, player);
+                return;
+            }
+        }
+
         RoundManager.NextRound();
 
         ChangeUnitsCanTakeAction();

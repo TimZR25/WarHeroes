@@ -1,5 +1,4 @@
 ﻿using Assets.Scripts.Abilities.ActiveAbilities;
-using Assets.Scripts.Abilities.PassiveAbilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
