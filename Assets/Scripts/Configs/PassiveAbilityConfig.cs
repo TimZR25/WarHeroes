@@ -1,5 +1,4 @@
 ﻿using Assets.Scripts.Abilities.ActiveAbilities;
-using Assets.Scripts.Abilities.PassiveAbilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +11,12 @@ namespace Assets.Scripts.Configs
     [Serializable]
     public abstract class PassiveAbilityConfig : ScriptableObject, IPassiveAbility
     {
-        [SerializeField] private double _coefficient;
-        public decimal Coefficient { get => (decimal)_coefficient; set { } }
+        [field: SerializeField] public string Name { get; set; }
 
         [field: SerializeField] public string Description { get; set; }
+
+        [SerializeField] private double _coefficient;
+        public decimal Coefficient { get => (decimal)_coefficient; set { } }
 
         public abstract void Execute(IUnit unit);
     }

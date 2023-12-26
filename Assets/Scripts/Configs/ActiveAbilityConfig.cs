@@ -12,6 +12,7 @@ namespace Assets.Scripts.Configs
     [Serializable]
     public class ActiveAbilityConfig : ScriptableObject, IActiveAbility
     {
+        [field: SerializeField] public string Name { get; set; }
         [SerializeField] private double _coefficient;
         public decimal Coefficient { get => (decimal)_coefficient; set { } }
         [field: SerializeField] public string Description { get; set; }

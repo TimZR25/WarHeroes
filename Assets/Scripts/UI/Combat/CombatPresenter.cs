@@ -1,15 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
-using static UnityEditor.Experimental.GraphView.GraphView;
-using static UnityEngine.UI.CanvasScaler;
 
 namespace Assets.Scripts.UI.Combat
 {
@@ -158,6 +150,10 @@ namespace Assets.Scripts.UI.Combat
 
         private void CurrentUnitChanged(object sender, EventArgs eventArgs)
         {
+            CombatManager.CurrentUnit.CellParent.Select();
+
+            _view.AbilityBoardView.Hide();
+
             DeselectCells(_selectedCells);
             _selectedCells.Clear();
 
@@ -171,12 +167,12 @@ namespace Assets.Scripts.UI.Combat
         {
             _view.EndGameView.Show();
             _view.EndGameView.Init(player.Name);
-            _view.Hide();
         }
 
         public void UnitSkipTurn()
         {
             _unitAction = UnitStateAction.None;
+            _view.AbilityBoardView.Hide();
             CombatManager.CurrentUnit.SkipTurn();
         }
 
@@ -184,14 +180,10 @@ namespace Assets.Scripts.UI.Combat
         {
             DeselectCells(_selectedCells);
 
-            CombatManager.CurrentUnit.CellParent.Deselect();
+            CombatManager.CurrentUnit.CellParent.Select();
 
-            _unitAction = UnitStateAction.Ability;
-
-            _selectedCells = CombatManager.GameField.GetNeighborsRadius(CombatManager.CurrentUnit.CellParent,
-                CombatManager.CurrentUnit.Stats.ActiveAbilities[_abilityIndex].Range);
-
-            SelectCells(_selectedCells);
+            _view.AbilityBoardView.Init(CombatManager.CurrentUnit.Stats.ActiveAbilities);
+            _view.AbilityBoardView.Show();
         }
 
         public void UnitMove()
@@ -201,6 +193,8 @@ namespace Assets.Scripts.UI.Combat
 
 
             _unitAction = UnitStateAction.Move;
+
+            _view.AbilityBoardView.Hide();
 
             _selectedCells = CombatManager.GameField.GetNeighborsRadius(CombatManager.CurrentUnit.CellParent, 
                 CombatManager.CurrentUnit.Stats.DistanceOfMove);
@@ -220,17 +214,18 @@ namespace Assets.Scripts.UI.Combat
 
         private void ChangeAbilityIndex(object sender, int index)
         {
+            _unitAction = UnitStateAction.Ability;
+
             _abilityIndex = index;
 
-            if (_unitAction == UnitStateAction.Ability)
-            {
-                DeselectCells(_selectedCells);
+            DeselectCells(_selectedCells);
 
-                _selectedCells = CombatManager.GameField.GetNeighborsRadius(CombatManager.CurrentUnit.CellParent,
-                    CombatManager.CurrentUnit.Stats.ActiveAbilities[_abilityIndex].Range);
+            CombatManager.CurrentUnit.CellParent.Deselect();
 
-                SelectCells(_selectedCells);
-            }
+            _selectedCells = CombatManager.GameField.GetNeighborsRadius(CombatManager.CurrentUnit.CellParent,
+                CombatManager.CurrentUnit.Stats.ActiveAbilities[_abilityIndex].Range);
+
+            SelectCells(_selectedCells);
         }
 
         private void QuitGame()

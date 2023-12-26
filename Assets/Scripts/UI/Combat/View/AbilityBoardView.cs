@@ -1,13 +1,18 @@
+using Assets.Scripts.UI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AbilityBoardView : MonoBehaviour
+public class AbilityBoardView : MonoBehaviour , IView
 {
     [SerializeField] private Button _abilityFirstButton;
     [SerializeField] private Button _abilitySecondButton;
+
+    [SerializeField] private TextMeshProUGUI _abilityFirstText;
+    [SerializeField] private TextMeshProUGUI _abilitySecondText;
 
     public event EventHandler<int> OnAbilityChanged;
 
@@ -15,11 +20,6 @@ public class AbilityBoardView : MonoBehaviour
     {
         _abilityFirstButton.onClick.AddListener(ChangeFirstAbility);
         _abilitySecondButton.onClick.AddListener(ChangeSecondAbility);
-    }
-
-    private void Start()
-    {
-        ChangeFirstAbility();
     }
 
     private void ChangeFirstAbility()
@@ -42,5 +42,27 @@ public class AbilityBoardView : MonoBehaviour
         _abilitySecondButton.image.color = Color.gray;
 
         OnAbilityChanged?.Invoke(this, 1);
+    }
+
+    public void Show()
+    {
+        gameObject.SetActive(true);
+
+        _abilitySecondButton.image.color = Color.white;
+        _abilityFirstButton.image.color = Color.white;
+
+        _abilityFirstButton.interactable = true;
+        _abilitySecondButton.interactable = true;
+    }
+
+    public void Init(List<IActiveAbility> abilities)
+    {
+        _abilityFirstText.text = abilities[0].Name;
+        _abilitySecondText.text = abilities[1].Name;
+    }
+
+    public void Hide()
+    {
+        gameObject.SetActive(false);
     }
 }

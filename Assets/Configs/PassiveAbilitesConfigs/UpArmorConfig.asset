@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f65b90876a96db4980568b99b826505, type: 3}
   m_Name: UpArmorConfig
   m_EditorClassIdentifier: 
-  _coefficient: 5
+  <Name>k__BackingField: UpArmor
   <Description>k__BackingField: "\u041F\u043E\u0432\u044B\u0448\u0435\u043D\u0438\u0435
     \u0431\u0440\u043E\u043D\u0438"
+  _coefficient: 5
